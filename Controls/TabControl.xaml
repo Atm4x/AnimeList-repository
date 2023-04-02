@@ -1,0 +1,30 @@
+﻿<Grid x:Class="AnimeList.Controls.TabControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:AnimeList.Controls"
+             mc:Ignorable="d" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="3, 0, 3, 0" 
+             DataContext="{Binding 
+             RelativeSource={RelativeSource Self}}"
+             xmlns:Converters="clr-namespace:AnimeList.Converters">
+    <Grid.Resources>
+        <ResourceDictionary>
+            <Converters:BoolToVisibilityConverter x:Key="BoolToVisibility" TrueValue="Hidden" FalseValue="Visible"></Converters:BoolToVisibilityConverter>
+        </ResourceDictionary>
+    </Grid.Resources>
+    <Border x:Name="button" HorizontalAlignment="Left" Padding="5" Background="#3b3b3b" BorderBrush="Black" CornerRadius="15, 15, 0, 0"
+            MouseDown="Activation" >
+        <Border.ContextMenu>
+            <ContextMenu x:Name="CtxMenu" Style="{StaticResource MenuItemStyle}" Visibility="{Binding Converter={StaticResource BoolToVisibility}, Path=IsMain}">
+                <MenuItem Header="Перейти к расположению" Click="ToTopFilenameClicked" ></MenuItem>
+            </ContextMenu>
+        </Border.ContextMenu>
+        <StackPanel Orientation="Horizontal" x:Name="Panel">
+            <TextBlock x:Name="TabName" Text="Default" FontSize="12" Margin="10, 0, 5, 0"></TextBlock>
+            <Border Background="#5b5b5b" x:Name="xDelete" Margin="5, 0, 10, 0" VerticalAlignment="Center" HorizontalAlignment="Center" CornerRadius="5" MouseDown="RemoveButton">
+                <TextBlock Text="x" Foreground="White" FontSize="12" Padding="3 0 3 0"></TextBlock>
+            </Border>
+        </StackPanel>
+    </Border>
+</Grid>
