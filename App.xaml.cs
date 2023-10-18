@@ -27,10 +27,12 @@ namespace AnimeList
         public static bool isUpdated = false;
         public static AddWindow window;
         public static VersionUpdate versionUpdate;
+        public static HistoryList historyList;
 
         protected override void OnStartup(StartupEventArgs e)
         {
             ExectutionPath = Environment.CurrentDirectory;
+            historyList = new HistoryList();
 
 
             CheckUpdates();

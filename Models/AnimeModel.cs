@@ -20,7 +20,7 @@ namespace AnimeList.Models
     public class AnimeList
     {
         [JsonInclude]
-        public List<AnimeModel> AL { get; private set; }  
+        public List<AnimeModel> AL { get; set; }  
         
         [NonSerialized]
         [JsonIgnore]
@@ -41,7 +41,7 @@ namespace AnimeList.Models
             AL = models ?? new List<AnimeModel>();
         }
 
-        public void AddModel(AnimeModel model)
+        public void AddModel(AnimeModel model, bool ignore = false)
         {
             try
             {
@@ -66,6 +66,18 @@ namespace AnimeList.Models
                     WriteIndented = true
                 };
 
+                if (!ignore)
+                {
+                    var hsmodel = CreateHistoryModel();
+
+
+                    hsmodel.AddAction(new AddAction()
+                    {
+                        AModel = model,
+                        AnimeList = this
+                    });
+                }
+
                 SaveChanges();
 
             }
@@ -73,6 +85,20 @@ namespace AnimeList.Models
             {
                 ALExceptions.ThrowException(SetStatus.InternalError);
             }
+        }
+        public HistoryModel CreateHistoryModel()
+        {
+            var hsmodel = App.historyList.HList.FirstOrDefault(x => x.Tab == App.list.GetActive());
+            if (hsmodel == null)
+            {
+                hsmodel = new HistoryModel()
+                {
+                    HList = new List<IAction>(),
+                    Tab = App.list.GetActive()
+                };
+                App.historyList.HList.Add(hsmodel);
+            }
+            return hsmodel;
         }
 
         public void SaveChanges()
@@ -103,10 +129,21 @@ namespace AnimeList.Models
                 ALExceptions.ThrowException(SetStatus.InternalError);
             }
         }
-        public void RemoveModel(int place)
+        public void RemoveModel(int place, bool ignore = false)
         {
             try
             {
+                if (!ignore)
+                {
+                    var hsmodel = CreateHistoryModel();
+
+                    hsmodel.AddAction(new RemoveAction()
+                    {
+                        AModel = AL.First(x => x.Place == place),
+                        AnimeList = this
+                    });
+                }
+
                 var config = App.Configuration.FindConfig(this);
                 var toplist = AL.Where(x => x.Place > place).ToList();
                 var bottomlist = AL.Where(x => x.Place < place).ToList();
@@ -125,6 +162,7 @@ namespace AnimeList.Models
                     Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
                     WriteIndented = true
                 };
+
                 SaveChanges();
 
             }

@@ -53,7 +53,7 @@
             </Setter>
         </Style>
 
-        
+
         <Style TargetType="TextBox">
             <Setter Property="FontFamily" Value="Verdana"/>
             <Setter Property="CaretBrush" Value="White"/>

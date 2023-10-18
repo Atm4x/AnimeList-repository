@@ -12,6 +12,7 @@ using System.Text.Unicode;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -262,12 +263,15 @@ namespace AnimeList.Windows
             var selected = AnimeList.SelectedItems;
             if (selected.Count >= 2)
             {
-                Edit.BorderThickness = new Thickness(0);
+                //Edit.BorderThickness = new Thickness(0);
                 Edit.BorderBrush = Brushes.Black;
+                Edit.IsEnabled = false;
                 
-                Remove.BorderThickness = new Thickness(1);
+
+                //Remove.BorderThickness = new Thickness(1);
                 Remove.BorderBrush = Brushes.White;
-                
+                Remove.IsEnabled = true;
+
                 if (Grid.GetColumnSpan(AnimeList) == 2)
                 {
                     Grid.SetColumnSpan(AnimeList, 3);
@@ -278,11 +282,14 @@ namespace AnimeList.Windows
             }
             else if (selected.Count >= 1)
             {
-                Edit.BorderThickness = new Thickness(1);
+                Edit.IsEnabled = true;
+                //Edit.BorderThickness = new Thickness(1);
                 Edit.BorderBrush = Brushes.White;
-                
-                Remove.BorderThickness = new Thickness(1);
+
+                //Remove.BorderThickness = new Thickness(1);
                 Remove.BorderBrush = Brushes.White;
+                Remove.IsEnabled = true;
+
                 if (Grid.GetColumnSpan(AnimeList) == 2)
                 {
                     ActualName.Text = ((AnimeModel) AnimeList.SelectedItem).Name;
@@ -292,12 +299,14 @@ namespace AnimeList.Windows
             }
             else
             {
-                Edit.BorderThickness = new Thickness(0);
+                //Edit.BorderThickness = new Thickness(0);
                 Edit.BorderBrush = Brushes.Black;
-                
-                Remove.BorderThickness = new Thickness(0);
+                Edit.IsEnabled = false;
+
+                //Remove.BorderThickness = new Thickness(0);
                 Remove.BorderBrush = Brushes.Black;
-                
+                Remove.IsEnabled = false;
+
                 if (Grid.GetColumnSpan(AnimeList) == 2)
                 {
                     Grid.SetColumnSpan(AnimeList, 3);
@@ -325,6 +334,7 @@ namespace AnimeList.Windows
                 AnimeList.ItemsSource = list.GetModels();
             }
 
+            AnimeList.Focus();
             list.SaveChanges();
 
         }
@@ -441,9 +451,14 @@ namespace AnimeList.Windows
                 return;
             }
 
+
+            var value = ActualStatus.IsChecked.Value;
             var current = ((AnimeModel)AnimeList.SelectedItem);
             if (int.TryParse(ActualPlace.Text, out int place))
             {
+                var oldPlace = Convert.ToInt32(current.Place.ToString());
+                var oldName = current.Name.ToString();
+                var oldStatus = Convert.ToInt32(current.Status);
                 if (current.Place == place)
                 {
                     var item = list.AL[
@@ -454,14 +469,28 @@ namespace AnimeList.Windows
                 }
                 else
                 {
-                    list.RemoveModel(current.Place);
-                    var value = ActualStatus.IsChecked.Value;
+                    list.RemoveModel(current.Place, true);
                     current = new AnimeModel(place, ActualName.Text, value == false ? AnimeModelStatus.InProcess : AnimeModelStatus.Finished);
                     if (current.Place > list.GetModels().Count) current.Place = list.GetModels().Count + 1;
-                    list.AddModel(current);
+                    list.AddModel(current, true);
                     list.SaveChanges();
                 }
 
+
+
+                var hsmodel = list.CreateHistoryModel();
+
+                hsmodel.AddAction(new EditAction()
+                {
+                    NameA = oldName,
+                    NameB = ActualName.Text,
+                    PlaceA = oldPlace,
+                    PlaceB = place,
+                    WatchingA = oldStatus == 1 ? AnimeModelStatus.InProcess : AnimeModelStatus.Finished,
+                    WatchingB = value == false ? AnimeModelStatus.InProcess : AnimeModelStatus.Finished,
+                    AModel = current,
+                    AnimeList = list
+                }) ;
 
                 AnimeList.ItemsSource = list.GetModels();
                 AnimeList.ScrollIntoView(current);
@@ -529,6 +558,149 @@ namespace AnimeList.Windows
             disappearStoryboard.Completed += (sender, e) => 
                 NewContentPanel.Visibility = Visibility.Hidden;
             disappearStoryboard.Begin(NewContentPanel);
+        }
+
+        private void BackButtonOnWiFiPanelClicked(object sender, MouseButtonEventArgs e)
+        {
+            CloseWiFiPanel();
+        }
+
+        public void CloseWiFiPanel()
+        {
+            ThicknessAnimation animation = new ThicknessAnimation();
+            animation.Duration = TimeSpan.FromSeconds(0.7);
+            animation.To = new Thickness(30, -2000, 30, 30); // Начальное положение за пределами окна
+            animation.From = new Thickness(30); // Конечное положение - без отступов
+
+
+            ExponentialEase easingFunction = new ExponentialEase();
+            easingFunction.EasingMode = EasingMode.EaseIn;
+            animation.EasingFunction = easingFunction;
+            // Применяем анимацию к свойству Margin
+            helper.Dispose();
+            Synchronize.BeginAnimation(Border.MarginProperty, animation);
+        }
+
+        public TcpHelper helper;
+
+        private async void WiFiSyncronizeButtonClicked()
+        {
+
+            ThicknessAnimation animation = new ThicknessAnimation();
+            animation.Duration = TimeSpan.FromSeconds(0.7);
+            animation.From = new Thickness(30, -2000, 30, 30); // Начальное положение за пределами окна
+            animation.To = new Thickness(30); // Конечное положение - без отступов
+
+            ExponentialEase easingFunction = new ExponentialEase();
+            easingFunction.EasingMode = EasingMode.EaseOut;
+            animation.EasingFunction = easingFunction;
+            // Применяем анимацию к свойству Margin
+            Synchronize.BeginAnimation(Border.MarginProperty, animation);
+
+            helper = new TcpHelper();
+            helper.OnError += (mes) =>
+            {
+                Dispatcher.Invoke(() => 
+                { 
+                    MessageBox.Show(mes); 
+                    CloseWiFiPanel();
+                });
+            };
+            helper.Start();
+            var code = helper.ReturnCode();
+            LocalWifiCode.Text = code;
+
+            if (code == "Нет сети") return;
+            helper.OnAccepted += AcceptedClient;
+            helper.OnConnected += ConnectedClient;
+
+            await helper.StartWaiting();
+        }
+        private async void ConnectedClient(System.Net.Sockets.TcpClient client)
+        {
+            var gotList = await helper.ReadIncomingAsync();
+            App.list.GetActive().model.ListConnected.AL = gotList.AL;
+            App.list.GetActive().model.ListConnected.SaveChanges();
+            AnimeList.ItemsSource = gotList.GetModels();
+            CloseWiFiPanel();
+        }
+
+        private async void AcceptedClient(System.Net.Sockets.TcpClient clientConnected)
+        {
+            Models.AnimeList list = App.list.GetActive().model.ListConnected;
+            await helper.SendAnimeList(clientConnected, list);
+            CloseWiFiPanel();
+        }
+
+        private async void EnteredWiFiCode(object sender, RoutedEventArgs e)
+        {
+            if (WiFiCodeEntering.Text == LocalWifiCode.Text)
+                return;
+            if (string.IsNullOrWhiteSpace(WiFiCodeEntering.Text))
+                return;
+            if(helper != null)
+            {
+                await helper.Connect(WiFiCodeEntering.Text);
+            }
+        }
+
+        private void WindowKeyDownPreview(object sender, KeyEventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.LeftCtrl))
+            {
+                if (Keyboard.IsKeyDown(Key.Z))
+                {
+                    var history = App.historyList.HList.FirstOrDefault(x => x.Tab == App.list.GetActive());
+
+                    if (history != null)
+                    {
+                        if (Keyboard.IsKeyDown(Key.LeftShift))
+                        {
+                            history.GoForward();
+
+                        }
+                        else
+                        {
+                            history.GoBack();
+
+                        }
+                    }
+
+                    AnimeList.ItemsSource = App.list.GetActive().model.ListConnected.GetModels();
+                }
+            }
+        }
+
+        private void ExtraButtonMouseClicked(object sender, RoutedEventArgs e)
+        {
+            ContextMenu contextMenu = ExtraButton.ContextMenu;
+            if (contextMenu != null && contextMenu.IsOpen == false)
+            {
+                contextMenu.PlacementTarget = ExtraButton;
+                contextMenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
+                contextMenu.IsOpen = true;
+            }
+        }
+
+        private void ExtraButtonMouseLeave(object sender, MouseEventArgs e)
+        {
+            ContextMenu contextMenu = ExtraButton.ContextMenu;
+            if (contextMenu != null && contextMenu.IsOpen == true)
+            {
+                if (!contextMenu.IsMouseOver)
+                {
+                    contextMenu.IsOpen = false;
+                }
+            }
+        }
+
+        private void ElementInExtraClicked(object sender, RoutedEventArgs e)
+        {
+            var parent = (((System.Windows.Controls.Button)sender).TemplatedParent as MenuItem).Parent;
+            var tag = Convert.ToInt32(((System.Windows.Controls.Button)sender).Tag);
+            (parent as ContextMenu).IsOpen = false;
+            if (tag == 1)
+                WiFiSyncronizeButtonClicked();
         }
     }
 
