@@ -51,7 +51,7 @@ namespace AnimeList.Models
 
                 for (int y = AL.Count - 1; y > model.Place - 1; y--)
                 {
-                    var mod = new AnimeModel(AL[y - 1].Place + 1, AL[y - 1].Name);
+                    var mod = new AnimeModel(AL[y - 1].Place + 1, AL[y - 1].Name, AL[y - 1].Status);
 
                     AL[y] = mod;
                 }
@@ -223,7 +223,7 @@ namespace AnimeList.Models
         {
             Place = place;
             _Name = name;
-            _Status = modelStatus;
+            Status = modelStatus;
         }
 
 
