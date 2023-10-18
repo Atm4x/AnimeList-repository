@@ -5,9 +5,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:AnimeList.Windows"
         mc:Ignorable="d"
-        Title="AL: Аниме список" Height="620" Width="1000" MinHeight="620" MinWidth="1000" WindowStartupLocation="CenterScreen" Background="#2b2b2b" Closing="OnClosing">
+        Title="AL: Аниме список" Height="670" Width="1000" MinHeight="670" MinWidth="1000" WindowStartupLocation="CenterScreen" Background="#2b2b2b" Closing="OnClosing">
 
-    <Grid>
+    <Grid KeyDown="WindowKeyDownPreview" x:Name="WholeControlPanel">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="35"/>
             <RowDefinition Height="6*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
@@ -33,47 +33,63 @@
         </Border>
         
         <Border Grid.Row="1" Background="#3b3b3b" Grid.ColumnSpan="3">
-            <Grid >
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Border Grid.Column="0" Padding="12">
-                    <Border Grid.Column="0" CornerRadius="12" Background="#2f2f2f" VerticalAlignment="Center">
-                        <Button Content="Добавить" Background="Transparent" BorderThickness="0" Click="AddButton"></Button>
-                    </Border>
+                <Border Grid.Column="0"  HorizontalAlignment="Stretch" Style="{DynamicResource MainBtns}">
+                    <Button Content="Добавить" Background="Transparent" FontSize="16" HorizontalContentAlignment="Center" BorderThickness="0" Click="AddButton"></Button>
                 </Border>
-                <Border Grid.Column="1" Padding="12" >
-                    <Border x:Name="Remove" Grid.Column="0" CornerRadius="12" Background="#2f2f2f" VerticalAlignment="Center">
-                        <Button Content="Удалить" Background="Transparent" BorderThickness="0" Click="RemoveButton"></Button>
-                    </Border>
+                <Border Grid.Column="1" x:Name="Remove"  HorizontalAlignment="Stretch" Style="{DynamicResource MainBtns}" IsEnabled="False">
+                    <Button Content="Удалить" Background="Transparent" FontSize="16" HorizontalContentAlignment="Center" BorderThickness="0" Click="RemoveButton"></Button>
                 </Border>
-                <Border Grid.Column="2" Padding="12">
-                    <Border x:Name="Edit" Grid.Column="0" CornerRadius="12" Background="#2f2f2f" VerticalAlignment="Center">
-                        <Button Content="Редактировать" FontSize="16" Background="Transparent" BorderThickness="0" Click="EditClick">
-                            
-                        </Button>
-                    </Border>
+                <Border x:Name="Edit" Grid.Column="2" HorizontalAlignment="Stretch" Style="{DynamicResource MainBtns}" IsEnabled="False">
+                    <Button Content="Редактировать" HorizontalContentAlignment="Center" FontSize="16" Background="Transparent" BorderThickness="0" Click="EditClick">
+
+                    </Button>
                 </Border>
-                <Border Grid.Column="3" Padding="12">
-                    <Border Grid.Column="0" CornerRadius="12" Background="#2f2f2f" VerticalAlignment="Center">
-                        <Button Content="Скопировать" FontSize="20" Background="Transparent" BorderThickness="0" Click="CopyButton"></Button>
-                    </Border>
+                <Border Grid.Column="3"  HorizontalAlignment="Stretch" Style="{DynamicResource MainBtns}">
+                    <Button Content="Скопировать" FontSize="16" HorizontalContentAlignment="Center" Background="Transparent" BorderThickness="0" Click="CopyButton"></Button>
                 </Border>
-                <Border Grid.Column="4" Padding="12">
-                    <Border Grid.Column="0" CornerRadius="12" Background="#2f2f2f" VerticalAlignment="Center">
-                        <Button Content="Экспорт" FontSize="20" Background="Transparent" BorderThickness="0" Click="ExportClick"></Button>
-                    </Border>
+                <Border Grid.Column="4"  HorizontalAlignment="Stretch" Style="{DynamicResource MainBtns}">
+                    <Button Content="Экспорт" FontSize="16" HorizontalContentAlignment="Center" Background="Transparent" BorderThickness="0" Click="ExportClick"></Button>
                 </Border>
+
+
+                <Border Grid.Column="5" HorizontalAlignment="Stretch" Style="{DynamicResource MainBtns}" BorderThickness="0" x:Name="ExtraButton" MouseLeave="ExtraButtonMouseLeave">
+                    <Border.ContextMenu>
+                        <ContextMenu BorderThickness="0" Foreground="Transparent" Background="Transparent">
+                            <ContextMenu.ItemContainerStyle>
+                                <Style TargetType="MenuItem">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="MenuItem">
+                                                <Border Style="{DynamicResource MainBtns}" BorderThickness="1" BorderBrush="White" Padding="5">
+                                                    <Button FontSize="16" Tag="{TemplateBinding Tag}" HorizontalContentAlignment="Center" Click="ElementInExtraClicked" Background="Transparent" Command="{TemplateBinding Command}" Content="{TemplateBinding Header}" />
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+
+                            </ContextMenu.ItemContainerStyle>
+                            <MenuItem Tag="1" Header="Синхронизация"/>
+                        </ContextMenu>
+                    </Border.ContextMenu>
+                    <Button Content="Дополнительные" FontSize="16" Click="ExtraButtonMouseClicked" HorizontalContentAlignment="Center" Background="Transparent" BorderThickness="0"></Button>
+                </Border>
+
             </Grid>
         </Border>
-        
-        
-        <ListView x:Name="AnimeList"  ItemContainerStyle="{StaticResource MyStyle}" ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                  Grid.ColumnSpan="3" Grid.Row="2" Background="#2b2b2b" Margin="5" Padding="5" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#00000000" >
+
+
+        <ListView x:Name="AnimeList"  ItemContainerStyle="{StaticResource MyStyle}" ScrollViewer.PanningRatio="0.5"  ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                  Grid.ColumnSpan="3" Grid.Row="2" Background="#2b2b2b" Margin="5 0 5 0" Padding="5" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#00000000" >
             
             <ListView.ItemTemplate>
                 <DataTemplate >
@@ -81,7 +97,7 @@
                         <TextBlock FontSize="2.5"></TextBlock>
                         <StackPanel Orientation="Horizontal" >
                         
-                            <Border Background="#3d3d3d" CornerRadius="3" Padding="3" x:Name="PlaceBorder">
+                            <Border Background="#333333" CornerRadius="3" Padding="3" x:Name="PlaceBorder">
                                 <TextBlock Text="{Binding Place, StringFormat='{}{0}.'}" Background="Transparent"/>
                             </Border>
                             <TextBlock FontSize="2" Text="fFF" Opacity="0"></TextBlock>
@@ -96,6 +112,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
         <Border x:Name="Editing" Grid.Row="2" Grid.Column="2" Background="#363636" Opacity="0" Visibility="Hidden">
             <Grid>
                 <Grid.RowDefinitions>
@@ -172,6 +189,7 @@
             </Grid>
         </Border>
 
+        <Border  BorderBrush="Black" BorderThickness="0, 0.8, 0, 0" Grid.ColumnSpan="3" Grid.Row="2"/>
         <Border Grid.Row="3" Background="#121212" Grid.ColumnSpan="3" Cursor="Hand" MouseDown="VersionMouseDown">
             <TextBlock Margin="10, 0" x:Name="VersionControl" Text="Version" FontSize="14" Foreground="#919191"/>
         </Border>
@@ -180,6 +198,32 @@
             <TextBlock Text="Скопировано" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
 
+        <Border x:Name="Synchronize" MaxWidth="500" Grid.ColumnSpan="3" Grid.RowSpan="4" Margin="30, -2000, 30, 30" Background="#515151" CornerRadius="15" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="600" Padding="10">
+            <StackPanel>
+                <Grid>
+                    <Border Background="#292929" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Padding="10 5 10 5" MouseDown="BackButtonOnWiFiPanelClicked" CornerRadius="20">
+                        <TextBlock Text="Назад"/>
+                    </Border>
+                    <Border  HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="200" Margin="0, 20, 0, 0" CornerRadius="100" Background="White">
+                        <Grid>
+                            <Image Source="/Images/wifiimg.png" Stretch="Fill" VerticalAlignment="Center" Opacity="1" Margin="-15" HorizontalAlignment="Center">
+
+                            </Image>
+                        </Grid>
+                    </Border>
+                </Grid>
+                <TextBlock Text="Синхронизация по Wi-Fi" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 10 0 0" TextWrapping="Wrap" FontSize="30"/>
+                <TextBlock TextWrapping="WrapWithOverflow" Background="Transparent" FontStyle="Italic" TextAlignment="Center" Text="Для синхронизации по Wi-Fi требуется подключение к общей сети. Для подключения введите следующий код на втором устройстве:" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"  FontSize="16"/>
+                <Border Background="#373737">
+                    <TextBox IsReadOnly="True" x:Name="LocalWifiCode" Text="C0denE" Background="Transparent" BorderThickness="0" TextAlignment="Center" FontSize="40" FontWeight="DemiBold"/>
+                </Border>
+                <TextBlock FontSize="20" Text="Или же, введите уже имеющийся код в поле ниже:" Margin="10" TextAlignment="Center" FontStyle="Italic"/>
+                <TextBox x:Name="WiFiCodeEntering" Background="#373737" FontSize="20" Margin="0 10 0 10" HorizontalAlignment="Center" Width="300" Padding="0 5 0 5"/>
+                <Border VerticalAlignment="Center" HorizontalAlignment="Center" Style="{DynamicResource MainBtns}" CornerRadius="15" Padding="15, 5">
+                    <Button Content="Ввести" Background="Transparent" Padding="5"  Click="EnteredWiFiCode" FontSize="30"/>
+                </Border>
+            </StackPanel>
+        </Border>
 
         <Border x:Name="NewContentPanel" Visibility="Hidden" Opacity="1" Grid.RowSpan="4" Grid.ColumnSpan="3" Background="#bb000000">
             <Border Margin="180 80"  Background="#222222" CornerRadius="10" BorderThickness="15" BorderBrush="#1a1a1a" Padding="20">
@@ -231,15 +275,74 @@
         
         <Style TargetType="{x:Type Button}">
             <Setter Property="Background" Value="Green"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="0">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="{TemplateBinding Content}" FontSize="{TemplateBinding FontSize}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="FontFamily" Value="Verdana"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=IsEnabled, RelativeSource={RelativeSource TemplatedParent }}" Value="True">
+                                                <Setter Property="Foreground" Value="White"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=IsEnabled, RelativeSource={RelativeSource TemplatedParent }}" Value="False">
+                                                <Setter Property="Foreground" Value="Gray"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+        <Style x:Key="MainBtns" TargetType="Border">
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsMouseOver" Value="True"/>
+                        <Condition Property="IsEnabled" Value="True"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Background" Value="#222222"/>
+                </MultiTrigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsMouseOver" Value="False"/>
+                        <Condition Property="IsEnabled" Value="True"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Background" Value="#1a1a1a"/>
+                </MultiTrigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="#121212"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ComboBoxMains" TargetType="ComboBox">
+            <Setter Property="Background" Value="#232323"/>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsMouseOver" Value="True"/>
+                        <Condition Property="IsEnabled" Value="True"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Background" Value="#222222"/>
+                </MultiTrigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsMouseOver" Value="False"/>
+                        <Condition Property="IsEnabled" Value="True"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Background" Value="#1a1a1a"/>
+                </MultiTrigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="#121212"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
 </Window>

@@ -5,17 +5,12 @@
 Здесь вы сможете настраивать свои Топы для личной статистики.</ApplicationDescription>
   <CreateYear>2022</CreateYear>
   <VersionUpdate>
-    <VersionCount>4</VersionCount>
-    <VersionControl>AnimeList 1.2.0</VersionControl>
-    <VersionTitle>Добро пожаловать в AnimeList 1.2.0!</VersionTitle>
-    <VersionDescription>В обновлении топпера 1.2.0 были исправлены баги и добавлены новые фичи.
-Список изменений:
+    <VersionCount>5</VersionCount>
+    <VersionControl>AnimeList 1.2.1</VersionControl>
+    <VersionTitle>Добро пожаловать в AnimeList 1.2.1!</VersionTitle>
+    <VersionDescription>Список изменений в 1.2.1:
 
- • Добавлена возможность настраивать статус аниме в топпере. Теперь можно смело добавлять в топпер те аниме, которые вы ещё не досмотрели, но желаете их размещения в ваших топах.
- • Исправлен баг с выделением модели аниме из топа.
- • Добавлена форма обновления, в которой описаны изменения в обновлении 1.2.0 (текущая форма).
- • Добавлено оповещение об успешном копировании топа.
- • Частично добавлены анимации.
+ • Исправлен баг с изменением статуса аниме модели при добавлении нового.
 
 Вот и все изменения.</VersionDescription>
   </VersionUpdate>
