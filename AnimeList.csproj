@@ -108,6 +108,7 @@
     <Compile Include="Converters\BoolToValueConverter.cs" />
     <Compile Include="Helpers\ALCipher.cs" />
     <Compile Include="Helpers\ConfigCipher.cs" />
+    <Compile Include="Helpers\LanguagesHelper.cs" />
     <Compile Include="Helpers\Methods.cs" />
     <Compile Include="Helpers\TcpHelper.cs" />
     <Compile Include="Helpers\XmlConverter.cs" />
@@ -115,14 +116,19 @@
     <Compile Include="Models\AnimeModel.cs" />
     <Compile Include="Models\AnimeModelStatus.cs" />
     <Compile Include="Models\HistoryList.cs" />
+    <Compile Include="Models\LanguageModel.cs" />
     <Compile Include="Models\TabModelList.cs" />
     <Compile Include="Models\UpdateReport.cs" />
     <Compile Include="Models\ViewMode.cs" />
+    <Compile Include="Services\UIFinder.cs" />
     <Compile Include="Windows\AddTabChooseWindow.xaml.cs">
       <DependentUpon>AddTabChooseWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\AddWindow.xaml.cs">
       <DependentUpon>AddWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ChangeLanguageWindow.xaml.cs">
+      <DependentUpon>ChangeLanguageWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\ControlWindow.xaml.cs">
       <DependentUpon>ControlWindow.xaml</DependentUpon>
@@ -160,6 +166,10 @@
     <Page Include="Controls\TabControl.xaml" />
     <Page Include="Windows\AddTabChooseWindow.xaml" />
     <Page Include="Windows\AddWindow.xaml" />
+    <Page Include="Windows\ChangeLanguageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\ControlWindow.xaml" />
     <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

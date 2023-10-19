@@ -19,6 +19,7 @@ using System.Windows.Media.Animation;
 using AnimeList.Controls;
 using AnimeList.Helpers;
 using AnimeList.Models;
+using AnimeList.Services;
 using DiscordRPC;
 using Microsoft.Win32;
 using TabControl = AnimeList.Controls.TabControl;
@@ -117,6 +118,11 @@ namespace AnimeList.Windows
             Models.AnimeList list = null;
             WarningWindow check = null;
 
+            App.LanguageUpdated += LanguageUIUpdate;
+            LanguagesHelper.SaveDefaultLanguage();
+            App.Languages = LanguagesHelper.GetAllLanguagesModel().ToList();
+            var rus = App.Languages.FirstOrDefault(x => x.Code.Value.Equals("ru-RU"));
+            App.ChangeLanguage(rus ?? new LanguageClassTest.Models.LanguageModel());
 
             ALCipher.Cipher cipher1 = null;
 
@@ -124,6 +130,8 @@ namespace AnimeList.Windows
             if (Application.Current.Properties["ArbitraryArgName"] != null)
             {
                 InitializeComponent();
+
+
                 fname = Application.Current.Properties["ArbitraryArgName"].ToString();
                 check = new WarningWindow();
                 check.ShowDialog();
@@ -151,6 +159,8 @@ namespace AnimeList.Windows
                 WriteIndented = true
             };
             ALCipher.WriteCipher(new ALCipher.Cipher() {Type = "idk", EncryptionText = JsonSerializer.Serialize(it, options)});*/
+
+            
 
             ALCipher.Cipher cipher2 = Helpers.ALCipher.ReadCipher();
                 var own = cipher2.EncryptionText;
@@ -188,6 +198,34 @@ namespace AnimeList.Windows
             RefreshTabs();
             if (App.isUpdated)
                 ShowVersionReport();
+        }
+
+        private void LanguageUIUpdate(LanguageClassTest.Models.LanguageModel lang)
+        {
+
+            foreach (var translations in lang.Translate)
+            {
+                var buttonBlock = UIFinder.FindVisualChildren<System.Windows.Controls.Button>(WholeControlPanel).FirstOrDefault(x => x.Name == translations.Name);
+                if (buttonBlock != null)
+                {
+                    buttonBlock.Content = translations.Value;
+                    continue;
+                }
+
+                var textBlock = UIFinder.FindVisualChildren<TextBlock>(WholeControlPanel).FirstOrDefault(x => x.Name == translations.Name);
+                if (textBlock != null)
+                {
+                    textBlock.Text = translations.Value;
+                    continue;
+                }
+
+                var contextItemBlock = UIFinder.FindVisualChildren<MenuItem>(WholeControlPanel).FirstOrDefault(x => x.Name == translations.Name);
+                if (contextItemBlock != null)
+                {
+                    contextItemBlock.Header = translations.Value;
+                    continue;
+                }
+            }
         }
 
         public void RefreshTabs()
@@ -701,6 +739,16 @@ namespace AnimeList.Windows
             (parent as ContextMenu).IsOpen = false;
             if (tag == 1)
                 WiFiSyncronizeButtonClicked();
+            else if(tag == 2)
+            {
+                var window = new ChangeLanguageWindow();
+                window.ShowDialog();
+            }
+        }
+
+        private void WindowLoaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 

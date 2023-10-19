@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-16"?>
+<UpdateReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ApplicationTitle>AnimeList</ApplicationTitle>
+  <ApplicationDescription>Добро пожаловать в AnimeList!
+Здесь вы сможете настраивать свои Топы для личной статистики.</ApplicationDescription>
+  <CreateYear>2022</CreateYear>
+  <VersionUpdate>
+    <VersionCount>6</VersionCount>
+    <VersionControl>AnimeList 1.3.0</VersionControl>
+    <VersionTitle>Добро пожаловать в AnimeList 1.3.0!</VersionTitle>
+    <VersionDescription>Список главных изменений в 1.3.0:
+
+ • Полный редизайн кнопок управления топом.
+
+ • Добавление новой кнопки управления "Дополнения", функции которой будут пополняться.
+
+ • Добавление функции "Синхронизация", работающая по локальной сети для передачи топов без использования физических устройств.
+
+ • Добавление системы истории изменений. Теперь, нажатие на "Ctrl+Z" отменяет изменение, а "Ctrl+Shift+Z" - возвращает.
+
+Вот и все изменения данного обновления!</VersionDescription>
+  </VersionUpdate>
+</UpdateReport>

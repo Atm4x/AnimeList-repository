@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-16"?>
+<LanguageModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Language>
+        <Value>Русский</Value>
+    </Language>
+    <LanguageCode>
+        <Value>ru-RU</Value>
+    </LanguageCode>
+    <Translate>
+        <FieldOfString Name="AddModelButton">
+            <Value>Добавить</Value>
+        </FieldOfString>
+        <FieldOfString Name="RemoveModelButton">
+            <Value>Удалить</Value>
+        </FieldOfString>
+        <FieldOfString Name="EditModelButton">
+            <Value>Редактировать</Value>
+        </FieldOfString>
+        <FieldOfString Name="CopyModelsButton">
+            <Value>Копировать</Value>
+        </FieldOfString>
+        <FieldOfString Name="ExportModelsButton">
+            <Value>Экспорт</Value>
+        </FieldOfString>
+        <FieldOfString Name="ExtraControlButton">
+            <Value>Дополнительные</Value>
+        </FieldOfString>
+        <FieldOfString Name="EditingNameBlock">
+            <Value>Название</Value>
+        </FieldOfString>
+        <FieldOfString Name="EditingPlaceBlock">
+            <Value>Место</Value>
+        </FieldOfString>
+        <FieldOfString Name="EditingWatchedBlock">
+            <Value>Просмотрено: </Value>
+        </FieldOfString>
+        <FieldOfString Name="EditingSaveChangesButton">
+            <Value>Сохранить</Value>
+        </FieldOfString>
+        <FieldOfString Name="CopiedPopupMessage">
+            <Value>Скопировано</Value>
+        </FieldOfString>
+        <FieldOfString Name="SynchronizeBackButton">
+            <Value>Назад</Value>
+        </FieldOfString>
+        <FieldOfString Name="SynchronizePageTitle">
+            <Value>Синхронизация по Wi-Fi</Value>
+        </FieldOfString>
+        <FieldOfString Name="SynchronizePageHelp">
+            <Value>Для синхронизации по Wi-Fi требуется подключение к общей сети. Для подключения введите следующий код на втором устройстве:</Value>
+        </FieldOfString>
+        <FieldOfString Name="SynchronizePageOtherwise">
+            <Value>Или же, введите уже имеющийся код в поле ниже:</Value>
+        </FieldOfString>
+        <FieldOfString Name="SynchronizePageEnterButton">
+            <Value>Ввести</Value>
+        </FieldOfString>
+        <FieldOfString Name="ExtraSynchronizeContextItem">
+            <Value>Синхронизация</Value>
+        </FieldOfString>
+        <FieldOfString Name="ChangeLanguageItem">
+            <Value>Смена языка</Value>
+        </FieldOfString>
+    </Translate>
+</LanguageModel>

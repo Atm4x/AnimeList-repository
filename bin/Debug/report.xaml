@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-16"?>
+<UpdateReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ApplicationTitle>AnimeList</ApplicationTitle>
+  <ApplicationDescription>Добро пожаловать в AnimeList!
+Здесь вы сможете настраивать свои Топы для личной статистики.</ApplicationDescription>
+  <CreateYear>2022</CreateYear>
+  <VersionUpdate>
+    <VersionCount>4</VersionCount>
+    <VersionControl>AnimeList 1.2.0 BETA</VersionControl>
+    <VersionTitle>Добро пожаловать в AnimeList 1.2.0!</VersionTitle>
+    <VersionDescription>В обновлении добавлено много всего интересного! Например, данное окно!
+Здесь вы увидите то, что появилось с обновлением!
+Удачного использования!</VersionDescription>
+  </VersionUpdate>
+</UpdateReport>

@@ -8,6 +8,7 @@ using AnimeList.Controls;
 using AnimeList.Helpers;
 using AnimeList.Models;
 using AnimeList.Windows;
+using LanguageClassTest.Models;
 
 namespace AnimeList
 {
@@ -29,11 +30,22 @@ namespace AnimeList
         public static VersionUpdate versionUpdate;
         public static HistoryList historyList;
 
+        public delegate void LanguageUpdate(LanguageModel model);
+        public static event LanguageUpdate LanguageUpdated;
+
+        public static LanguageModel CurrentLanguage { get; private set; }
+        public static List<LanguageModel> Languages { get; set; }
+
+        public static void ChangeLanguage(LanguageModel model)
+        {
+            CurrentLanguage = model;
+            LanguageUpdated?.Invoke(CurrentLanguage);
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             ExectutionPath = Environment.CurrentDirectory;
             historyList = new HistoryList();
-
 
             CheckUpdates();
 
@@ -51,7 +63,7 @@ namespace AnimeList
             } else
             {
                 File.Create(xmlPath).Close();
-                File.WriteAllText(xmlPath, XmlConverter.ToXaml<UpdateReport>());
+                File.WriteAllText(xmlPath, XmlConverter.ToXaml(new UpdateReport()));
                 var updateReport = XmlConverter.FromXml<UpdateReport>(File.ReadAllText(xmlPath));
                 versionUpdate = updateReport.VersionUpdate;
             }

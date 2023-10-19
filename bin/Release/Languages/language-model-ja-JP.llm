@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-16"?>
+<LanguageModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Language>
+        <Value>日本語</Value>
+    </Language>
+    <LanguageCode>
+        <Value>ja-JP</Value>
+    </LanguageCode>
+    <Translate>
+        <FieldOfString Name="AddModelButton">
+            <Value>追加</Value>
+        </FieldOfString>
+        <FieldOfString Name="RemoveModelButton">
+            <Value>削除</Value>
+        </FieldOfString>
+        <FieldOfString Name="EditModelButton">
+            <Value>編集</Value>
+        </FieldOfString>
+        <FieldOfString Name="CopyModelsButton">
+            <Value>コピー</Value>
+        </FieldOfString>        
+	<FieldOfString Name="ExportModelsButton">
+            <Value>輸出</Value>
+        </FieldOfString>
+        <FieldOfString Name="ExtraControlButton">
+            <Value>おまけ</Value>
+        </FieldOfString>
+        <FieldOfString Name="EditingNameBlock">
+            <Value>名称</Value>
+        </FieldOfString>
+        <FieldOfString Name="EditingPlaceBlock">
+            <Value>場所</Value>
+        </FieldOfString>
+        <FieldOfString Name="EditingWatchedBlock">
+            <Value>監視されている：</Value>
+        </FieldOfString>
+        <FieldOfString Name="EditingSaveChangesButton">
+            <Value>変更を保存する</Value>
+        </FieldOfString>
+        <FieldOfString Name="CopiedPopupMessage">
+            <Value>コピー完了</Value>
+        </FieldOfString>
+        <FieldOfString Name="SynchronizeBackButton">
+            <Value>バック</Value>
+        </FieldOfString>
+        <FieldOfString Name="SynchronizePageTitle">
+            <Value>Wi-Fi経由での同期</Value>
+        </FieldOfString>
+        <FieldOfString Name="SynchronizePageHelp">
+            <Value>Wi-Fi同期には共有ネットワークへの接続が必要です。接続するには、2台目のデバイスに以下のコードを入力します：</Value>
+        </FieldOfString>
+        <FieldOfString Name="SynchronizePageOtherwise">
+            <Value>または、すでにお持ちのコードを下のボックスに入力してください：</Value>
+        </FieldOfString>
+        <FieldOfString Name="SynchronizePageEnterButton">
+            <Value>値を入力</Value>
+        </FieldOfString>
+        <FieldOfString Name="ExtraSynchronizeContextItem">
+            <Value>同期</Value>
+        </FieldOfString>
+        <FieldOfString Name="ChangeLanguageItem">
+            <Value>言語の変更</Value>
+        </FieldOfString>
+    </Translate>
+</LanguageModel>

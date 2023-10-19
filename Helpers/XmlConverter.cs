@@ -11,16 +11,18 @@ namespace AnimeList.Helpers
 {
     public static class XmlConverter
     {
-        public static string ToXaml<T>() where T : new()
+        public static string ToXaml<T>(T obj) where T : new()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(T));
-            var subReq = new T();
+            var subReq = obj;
 
             using (var strWriter = new StringWriter())
             {
                 using (XmlWriter writer = XmlWriter.Create(strWriter, new XmlWriterSettings()
                 {
-                    Indent = true
+                    Indent = true,
+                    IndentChars = "    "
+
                 }))
                 {
                     serializer.Serialize(writer, subReq);
@@ -35,8 +37,6 @@ namespace AnimeList.Helpers
             {
                 return (T)serializer.Deserialize(reader);
             }
-
-            return default;
         }
     }
 }
