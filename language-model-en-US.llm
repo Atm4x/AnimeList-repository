@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-16"?>
+<LanguageModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Language>
+        <Value>English</Value>
+    </Language>
+    <LanguageCode>
+        <Value>en-US</Value>
+    </LanguageCode>
+    <Translate>
+        <FieldOfString Name="AddModelButton">
+            <Value>Add</Value>
+        </FieldOfString>
+        <FieldOfString Name="RemoveModelButton">
+            <Value>Remove</Value>
+        </FieldOfString>
+        <FieldOfString Name="EditModelButton">
+            <Value>Edit</Value>
+        </FieldOfString>
+        <FieldOfString Name="CopyModelsButton">
+            <Value>Copy</Value>
+        </FieldOfString>        
+	<FieldOfString Name="ExportModelsButton">
+            <Value>Export</Value>
+        </FieldOfString>
+        <FieldOfString Name="ExtraControlButton">
+            <Value>Extra</Value>
+        </FieldOfString>
+        <FieldOfString Name="EditingNameBlock">
+            <Value>Name</Value>
+        </FieldOfString>
+        <FieldOfString Name="EditingPlaceBlock">
+            <Value>Place</Value>
+        </FieldOfString>
+        <FieldOfString Name="EditingWatchedBlock">
+            <Value>Is watched: </Value>
+        </FieldOfString>
+        <FieldOfString Name="EditingSaveChangesButton">
+            <Value>Save changes</Value>
+        </FieldOfString>
+        <FieldOfString Name="CopiedPopupMessage">
+            <Value>Copied</Value>
+        </FieldOfString>
+        <FieldOfString Name="SynchronizeBackButton">
+            <Value>Back</Value>
+        </FieldOfString>
+        <FieldOfString Name="SynchronizePageTitle">
+            <Value>Synchronization via Wi-Fi</Value>
+        </FieldOfString>
+        <FieldOfString Name="SynchronizePageHelp">
+            <Value>Wi-Fi synchronization requires a connection to a shared network. To connect, enter the following code on the second device:</Value>
+        </FieldOfString>
+        <FieldOfString Name="SynchronizePageOtherwise">
+            <Value>Or, enter the code you already have in the box below:</Value>
+        </FieldOfString>
+        <FieldOfString Name="SynchronizePageEnterButton">
+            <Value>Enter</Value>
+        </FieldOfString>
+        <FieldOfString Name="ExtraSynchronizeContextItem">
+            <Value>Synchronization</Value>
+        </FieldOfString>
+        <FieldOfString Name="ChangeLanguageItem">
+            <Value>Language change</Value>
+        </FieldOfString>
+    </Translate>
+</LanguageModel>
