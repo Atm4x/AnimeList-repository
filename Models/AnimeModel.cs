@@ -8,6 +8,7 @@ using System.Text.Unicode;
 using System.Windows;
 using System.Windows.Media;
 using AnimeList.Helpers;
+using AnimeList.Properties;
 
 namespace AnimeList.Models
 {
@@ -287,9 +288,18 @@ namespace AnimeList.Models
         private AnimeModelStatus _Status;
         public AnimeModelStatus Status { get => _Status; set
             {
-                Brush = value == AnimeModelStatus.Finished ? Brushes.White : Brushes.Khaki;
+                Brush = value == AnimeModelStatus.Finished ? GetForegroundColor() : GetForegroundWathcingColor();
                 _Status = value;
             } 
+        }
+
+        private static SolidColorBrush GetForegroundColor()
+        {
+            return App.Current.Resources["ForegroundBrush"] as SolidColorBrush;
+        }
+        private static SolidColorBrush GetForegroundWathcingColor()
+        {
+            return App.Current.Resources["ForegroundWatchingBrush"] as SolidColorBrush;
         }
 
         [JsonIgnore]
@@ -297,7 +307,7 @@ namespace AnimeList.Models
         public Visibility IsWatching() => _Status != AnimeModelStatus.Finished ? Visibility.Visible : Visibility.Hidden;
 
         [JsonIgnore]
-        public SolidColorBrush Brush { get; set; } = Brushes.White;
+        public SolidColorBrush Brush { get; set; } = GetForegroundColor();
 
 
     }

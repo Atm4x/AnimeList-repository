@@ -5,10 +5,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:AnimeList.Windows"
         mc:Ignorable="d"
-        Title="Добавить список" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300" MaxWidth="400" Height="200" MaxHeight="300" Background="#4f4f4f">
-    <Grid>
+        Title="AniList: Добавить список" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300" MaxWidth="400" Height="200" MaxHeight="300" Background="#4f4f4f">
+    <Grid x:Name="WholePageGrid">
         <StackPanel>
-        <Button Content="Create New List" Background="Gray" Padding="10" Click="AddClick"></Button>
-        <Button Content="Open List" Click="ChooseClick" Background="Gray" Padding="10"></Button></StackPanel>
+        <Button Name="CreateNewListButton" Content="Создать список" Background="Gray" Padding="10" Click="AddClick" Margin="10"></Button>
+            <Button Name="OpenListButton" Content="Открыть существующий" Click="ChooseClick" Background="Gray" Padding="10" Margin="10"></Button></StackPanel>
     </Grid>
 </Window>

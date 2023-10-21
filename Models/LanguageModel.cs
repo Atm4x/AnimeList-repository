@@ -40,6 +40,26 @@ namespace LanguageClassTest.Models
         [XmlElement("LanguageCode")]
         public Field<string> Code { get; set; } = "ru-RU";
 
+
+        [XmlElement("ControlWindowName")]
+        public Field<string> ControlWindowTitle { get; set; } = "AniList: Главное окно";
+
+        [XmlElement("AddWindowName")]
+        public Field<string> AddWindowTitle { get; set; } = "AniList: Добавить аниме";
+
+        [XmlElement("AddWindowDialogTranslate")]
+        public AddWindowDialogMessages AddWindowDialogTranslate { get; set; } = new AddWindowDialogMessages();
+
+
+        [XmlElement("AddTabWindowName")]
+        public Field<string> AddTabChooseWindowTitle { get; set; } = "AniList: Добавить список";
+
+
+        [XmlElement("AddTabWindowDialogTranslate")]
+        public AddTabChooseWindowDialogMessages AddTabWindowDialogTranslate { get; set; } = new AddTabChooseWindowDialogMessages();
+
+
+
         [XmlArray()]
         public List<Field<string>> Translate { get; set; } =
         new List<Field<string>>
@@ -48,7 +68,7 @@ namespace LanguageClassTest.Models
             ("RemoveModelButton", "Удалить"),
             ("EditModelButton", "Редактировать"),
             ("CopyModelsButton", "Копировать"),
-            ("ExportModelButton", "Экспорт"),
+            ("ExportModelsButton", "Экспорт"),
             ("ExtraControlButton", "Дополнительные"),
             ("EditingNameBlock", "Название"),
             ("EditingPlaceBlock", "Место"),
@@ -62,7 +82,23 @@ namespace LanguageClassTest.Models
             ("SynchronizePageEnterButton", "Ввести"),
             ("ExtraSynchronizeContextItem", "Синхронизация"),
             ("ChangeLanguageItem", "Смена языка"),
+            ("CreateNewListButton", "Создать список"),
+            ("OpenListButton", "Открыть существующий"),
         };
+
+
+        public class AddWindowDialogMessages
+        {
+            public string ErrorMessage { get; set; } = "Ошибка";
+            public string InputNameMessage { get; set; } = "Не введено название";
+            public string InputPlaceMessage { get; set; } = "Не введено место";
+            public string InputExistsMessage { get; set; } = "Введёное название уже присутствует в строке ";
+        }
+        public class AddTabChooseWindowDialogMessages
+        {
+            public string WarningMessage { get; set; } = "Внимание!";
+            public string ExistsMessage { get; set; } = "Этот список уже находится в AniList";
+        }
 
     }
 

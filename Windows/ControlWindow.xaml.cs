@@ -118,6 +118,31 @@ namespace AnimeList.Windows
             Models.AnimeList list = null;
             WarningWindow check = null;
 
+            //var listOfColorsRefs = new List<string>()
+            //{
+            //    "ForegroundColor",
+            //    "ForegroundWathcingColor",
+            //    "ForegroundDisabledColor",
+            //    "BackgroundDarkerColor",
+            //    "BackgroundMoreDarkerColor",
+            //    "BackgroundModelColor",
+            //    "MidColor",
+            //    "ButtonDisabledBackgroundColor",
+            //    "BackgroundColor",
+            //    "ButtonSelectedBackgroundColor",
+            //    "ButtonEnabledBackgroundColor",
+            //    "BackgroundEditingColor",
+            //    "InputBoxColor",
+            //    "BackgroundEditColor",
+            //};
+            //
+            //foreach (var item in listOfColorsRefs)
+            //{
+            //    App.Current.Resources[item] = (Color)ColorConverter.ConvertFromString(ColorHelper.InvertHexColor(App.Current.Resources[item].ToString()));
+            //}
+
+
+
             App.LanguageUpdated += LanguageUIUpdate;
             LanguagesHelper.SaveDefaultLanguage();
             App.Languages = LanguagesHelper.GetAllLanguagesModel().ToList();
@@ -202,7 +227,7 @@ namespace AnimeList.Windows
 
         private void LanguageUIUpdate(LanguageClassTest.Models.LanguageModel lang)
         {
-
+            Title = lang.ControlWindowTitle.Value;
             foreach (var translations in lang.Translate)
             {
                 var buttonBlock = UIFinder.FindVisualChildren<System.Windows.Controls.Button>(WholeControlPanel).FirstOrDefault(x => x.Name == translations.Name);
@@ -219,7 +244,7 @@ namespace AnimeList.Windows
                     continue;
                 }
 
-                var contextItemBlock = UIFinder.FindVisualChildren<MenuItem>(WholeControlPanel).FirstOrDefault(x => x.Name == translations.Name);
+                var contextItemBlock = UIFinder.FindVisualChildren<MenuItem>(ContextMenuOfExtraButton).FirstOrDefault(x => x.Name == translations.Name);
                 if (contextItemBlock != null)
                 {
                     contextItemBlock.Header = translations.Value;

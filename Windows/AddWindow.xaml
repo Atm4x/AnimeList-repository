@@ -5,8 +5,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:AnimeList.Windows"
         mc:Ignorable="d"
-        Title="AL: Добавить аниме" Height="300" Width="400" WindowStartupLocation="CenterOwner" Closing="OnClosing">
-    <Grid Background="#2c2c2c">
+        Title="AniList: Добавить аниме" Height="300" Width="400" WindowStartupLocation="CenterOwner" Closing="OnClosing">
+    <Grid Background="#2c2c2c" x:Name="WholePageGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="0.4*"></ColumnDefinition>
@@ -23,14 +23,14 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        
-        <TextBlock Grid.Column="1" Grid.ColumnSpan="3" Text="Название" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+
+        <TextBlock Name="EditingNameBlock" Grid.Column="1" Grid.ColumnSpan="3" Text="Название" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <TextBox x:Name="Name" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Background="#3c3c3c" BorderThickness="0" TextWrapping="Wrap"/>
-        <TextBlock Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2" Text="Место"  VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Name="EditingPlaceBlock" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2" Text="Место"  VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <TextBox x:Name="Place" Grid.Column="2" Grid.Row="3" BorderThickness="0" Background="#3c3c3c" TextWrapping="Wrap" Margin="15, 5, 15, 5"/>
         
         <Border Grid.Column="2" Grid.Row="5" Background="#3c3c3c">
-            <Button Background="Transparent" Content="Добавить" Click="AddClick"></Button>
+            <Button Name="AddModelButton" Background="Transparent" Content="Добавить" Click="AddClick"></Button>
         </Border>
     </Grid>
 </Window>

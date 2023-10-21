@@ -4,21 +4,47 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
 using System.Windows;
+using System.Windows.Controls;
 using AnimeList.Controls;
 using AnimeList.Helpers;
 using AnimeList.Models;
+using AnimeList.Services;
+using LanguageClassTest.Models;
 using Microsoft.Win32;
 
 namespace AnimeList.Windows
 {
     public partial class AddTabChooseWindow : Window
     {
+        private LanguageModel.AddTabChooseWindowDialogMessages translates = null;
         public AddTabChooseWindow()
         {
             InitializeComponent();
-            
+
+            UIChangeLanguage(App.CurrentLanguage);
         }
 
+        public void UIChangeLanguage(LanguageModel lang)
+        {
+            Title = lang.AddTabChooseWindowTitle.Value;
+            translates = lang.AddTabWindowDialogTranslate;
+            foreach (var translations in lang.Translate)
+            {
+                var buttonBlock = UIFinder.FindVisualChildren<System.Windows.Controls.Button>(WholePageGrid).FirstOrDefault(x => x.Name == translations.Name);
+                if (buttonBlock != null)
+                {
+                    buttonBlock.Content = translations.Value;
+                    continue;
+                }
+
+                var textBlock = UIFinder.FindVisualChildren<TextBlock>(WholePageGrid).FirstOrDefault(x => x.Name == translations.Name);
+                if (textBlock != null)
+                {
+                    textBlock.Text = translations.Value;
+                    continue;
+                }
+            }
+        }
         private void ChooseClick(object sender, RoutedEventArgs e)
         {
             var open = new OpenFileDialog();
@@ -56,13 +82,13 @@ namespace AnimeList.Windows
                 var existingOne = App.Configuration.Configs.FirstOrDefault(x => x.Path == filename);
                 if (existingOne != null)
                 {
-                    MessageBox.Show("Этот топ уже находится в Топпере.", "Внимание!");
+                    MessageBox.Show(translates.ExistsMessage, translates.WarningMessage);
                     return;
                 }
                 var config = new AnimeListConfig.Config(animelist, filename, name);
                 App.Configuration.AddConfig(config);
                 ConfigCipher.WriteConfigCipher();
-                App.list.TabList.Add(new TabControl(name, animelist));
+                App.list.TabList.Add(new Controls.TabControl(name, animelist));
             }
             Close();
         }
@@ -101,7 +127,7 @@ namespace AnimeList.Windows
                 
                 App.Configuration.AddConfig(config);
                 ConfigCipher.WriteConfigCipher();
-                App.list.TabList.Add(new TabControl(name, newList));
+                App.list.TabList.Add(new Controls.TabControl(name, newList));
             }
             Close();
         }

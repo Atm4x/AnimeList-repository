@@ -3,16 +3,44 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using AnimeList.Models;
+using AnimeList.Services;
+using LanguageClassTest.Models;
 
 namespace AnimeList.Windows
 {
     public partial class AddWindow : Window
     {
         public bool IsActive = false;
+        private LanguageModel.AddWindowDialogMessages translates = null;
+
         public AddWindow()
         {
             InitializeComponent();
+            UIChangeLanguage(App.CurrentLanguage);
+        }
+
+        public void UIChangeLanguage(LanguageModel lang)
+        {
+            Title = lang.AddWindowTitle.Value;
+            translates = lang.AddWindowDialogTranslate;
+            foreach (var translations in lang.Translate)
+            {
+                var buttonBlock = UIFinder.FindVisualChildren<System.Windows.Controls.Button>(WholePageGrid).FirstOrDefault(x => x.Name == translations.Name);
+                if (buttonBlock != null)
+                {
+                    buttonBlock.Content = translations.Value;
+                    continue;
+                }
+
+                var textBlock = UIFinder.FindVisualChildren<TextBlock>(WholePageGrid).FirstOrDefault(x => x.Name == translations.Name);
+                if (textBlock != null)
+                {
+                    textBlock.Text = translations.Value;
+                    continue;
+                }
+            }
         }
 
         public void Show()
@@ -26,20 +54,20 @@ namespace AnimeList.Windows
             Models.AnimeList list = App.list.GetActive().model.ListConnected;
             if (String.IsNullOrWhiteSpace(Name.Text))
             {
-                MessageBox.Show("Не введено название", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Hand);
+                MessageBox.Show(translates.InputNameMessage, translates.ErrorMessage, MessageBoxButton.OK, MessageBoxImage.Hand);
                 return;
             }
 
             if (String.IsNullOrWhiteSpace(Place.Text))
             {
-                MessageBox.Show("Не введено место", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Hand);
+                MessageBox.Show(translates.InputPlaceMessage, translates.ErrorMessage, MessageBoxButton.OK, MessageBoxImage.Hand);
                 return;
             }
 
             var found = list.GetModels().FirstOrDefault(x => x.Name == Name.Text);
             if (found != null)
             {
-                MessageBox.Show($"Введёное название уже присутствует в строке {found.Place}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Hand);
+                MessageBox.Show(translates.InputExistsMessage + found.Place, translates.ErrorMessage, MessageBoxButton.OK, MessageBoxImage.Hand);
                 return;
             }
             

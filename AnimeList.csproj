@@ -107,6 +107,7 @@
     </Compile>
     <Compile Include="Converters\BoolToValueConverter.cs" />
     <Compile Include="Helpers\ALCipher.cs" />
+    <Compile Include="Helpers\ColorHelper.cs" />
     <Compile Include="Helpers\ConfigCipher.cs" />
     <Compile Include="Helpers\LanguagesHelper.cs" />
     <Compile Include="Helpers\Methods.cs" />

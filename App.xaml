@@ -4,10 +4,29 @@
              xmlns:local="clr-namespace:AnimeList"
              StartupUri="Windows/ControlWindow.xaml">
     <Application.Resources>
-        <SolidColorBrush x:Key="MidBrsh" Color="#202020"/>
+        <Color x:Key="ForegroundColor">White</Color>
+        <SolidColorBrush x:Key="ForegroundBrush" Color="{DynamicResource ForegroundColor}"/>
+        <Color x:Key="ForegroundWathcingColor">Khaki</Color>
+        <Color x:Key="InputBoxColor">#2c2c2c</Color>
+        <SolidColorBrush x:Key="ForegroundWatchingBrush" Color="{DynamicResource ForegroundWathcingColor}"/>
+        <Color x:Key="ForegroundDisabledColor">Gray</Color>
+        <Color x:Key="BackgroundDarkerColor">#1e1e1e</Color>
+        <Color x:Key="BackgroundMoreDarkerColor">#121212</Color>
+        <Color x:Key="BackgroundModelColor">#333333</Color>
+        <Color x:Key="BackgroundColor">#2b2b2b</Color>
+        <Color x:Key="BackgroundEditingColor">#1f1f1f</Color>
+        <Color x:Key="BackgroundEditColor">#363636</Color>
+
+
+        <Color x:Key="ButtonDisabledBackgroundColor">#121212</Color>
+        <Color x:Key="ButtonSelectedBackgroundColor">#222222</Color>
+        <Color x:Key="ButtonEnabledBackgroundColor">#1a1a1a</Color>
+
+        <Color x:Key="MidColor">#202020</Color>
+        <SolidColorBrush x:Key="MidBrsh" Color="{DynamicResource MidColor}"/>
         <Style TargetType="TextBlock">
              <Setter Property="FontFamily" Value="Verdana"/>
-             <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}"></Setter>
              <Setter Property="FontSize" Value="20"/>
          </Style>
         <Style x:Key="MenuItemStyle" TargetType="{x:Type ContextMenu}">
@@ -21,7 +40,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ContextMenu}">
                         <Grid Background="Transparent">
-                            <Border Margin="10,10,0, 0" Background="{StaticResource MidBrsh}" BorderThickness="0">
+                            <Border Margin="10,10,0, 0" Background="{DynamicResource MidBrsh}" BorderThickness="0">
                                 <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" Margin="2"/>
                             </Border>
                         </Grid>
@@ -56,19 +75,19 @@
 
         <Style TargetType="TextBox">
             <Setter Property="FontFamily" Value="Verdana"/>
-            <Setter Property="CaretBrush" Value="White"/>
-            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="CaretBrush" Value="{DynamicResource ForegroundBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}"></Setter>
             <Setter Property="FontSize" Value="20"/>
         </Style>
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="Verdana"/>
-            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}"></Setter>
             
         </Style>
         <Style TargetType="PasswordBox">
             <Setter Property="FontFamily" Value="Verdana"/>
-            <Setter Property="CaretBrush" Value="White"/>
-            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="CaretBrush" Value="{DynamicResource ForegroundBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}"></Setter>
             <Setter Property="FontSize" Value="24"/>
         </Style>
         <Style x:Key="MyStyle" TargetType="ListViewItem">

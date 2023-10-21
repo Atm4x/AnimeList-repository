@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:AnimeList.Windows"
         mc:Ignorable="d"
-        Title="AL: Аниме список" Height="670" Width="1000" MinHeight="670" MinWidth="1000" WindowStartupLocation="CenterScreen" Background="#2b2b2b" Closing="OnClosing">
+        Title="AniList: Аниме список" Height="670" Width="1000" MinHeight="670" MinWidth="1000" WindowStartupLocation="CenterScreen" Background="#2b2b2b" Closing="OnClosing">
 
     <Grid KeyDown="WindowKeyDownPreview" x:Name="WholeControlPanel" Loaded="WindowLoaded">
         <Grid.ColumnDefinitions>
@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
 
         
-        <Border Grid.Row="0" Grid.ColumnSpan="3" Background="#1e1e1e">
+        <Border Grid.Row="0" Grid.ColumnSpan="3" Background="{DynamicResource WindowBackgroundBrushColor}">
             <ScrollViewer VerticalScrollBarVisibility="Disabled">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel x:Name="Tabs" Orientation="Horizontal"></StackPanel>
@@ -63,7 +63,7 @@
 
                 <Border Grid.Column="5" HorizontalAlignment="Stretch" Style="{DynamicResource MainBtns}" BorderThickness="0" x:Name="ExtraButton" MouseLeave="ExtraButtonMouseLeave">
                     <Border.ContextMenu>
-                        <ContextMenu BorderThickness="0" Foreground="Transparent" Background="Transparent">
+                        <ContextMenu BorderThickness="0" Foreground="Transparent" x:Name="ContextMenuOfExtraButton" Background="Transparent">
                             <ContextMenu.ItemContainerStyle>
                                 <Style TargetType="MenuItem">
                                     <Setter Property="Template">
@@ -78,7 +78,7 @@
                                 </Style>
 
                             </ContextMenu.ItemContainerStyle>
-                            <MenuItem Name="SynchronizeContextItem" Tag="1" Header="Синхронизация"/>
+                            <MenuItem Name="ExtraSynchronizeContextItem" Tag="1" Header="Синхронизация"/>
                             <MenuItem Name="ChangeLanguageItem" Tag="2" Header="Смена языка"/>
                             
                         </ContextMenu>
@@ -90,8 +90,8 @@
         </Border>
 
 
-        <ListView x:Name="AnimeList"  ItemContainerStyle="{StaticResource MyStyle}" ScrollViewer.PanningRatio="0.5"  ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                  Grid.ColumnSpan="3" Grid.Row="2" Background="#2b2b2b" Margin="5 0 5 0" Padding="5" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#00000000" >
+        <ListView x:Name="AnimeList"  ItemContainerStyle="{DynamicResource MyStyle}" ScrollViewer.PanningRatio="0.5"  ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                  Grid.ColumnSpan="3" Grid.Row="2" Background="{DynamicResource ListBackgroundBrushColor}" Margin="5 0 5 0" Padding="5" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#00000000" >
             
             <ListView.ItemTemplate>
                 <DataTemplate >
@@ -99,14 +99,14 @@
                         <TextBlock FontSize="2.5"></TextBlock>
                         <StackPanel Orientation="Horizontal" >
                         
-                            <Border Background="#333333" CornerRadius="3" Padding="3" x:Name="PlaceBorder">
+                            <Border Background="{DynamicResource BackgroundModelBrushColor}" CornerRadius="3" Padding="3" x:Name="PlaceBorder">
                                 <TextBlock Text="{Binding Place, StringFormat='{}{0}.'}" Background="Transparent"/>
                             </Border>
                             <TextBlock FontSize="2" Text="fFF" Opacity="0"></TextBlock>
                             <Image Source="/Images/rsz_watching.png" Visibility="{Binding Watching}" Stretch="Fill" MaxHeight="{Binding ElementName=PlaceBorder, Path=ActualHeight}"/>
                             <TextBlock FontSize="2" Text="fFF" Opacity="0"></TextBlock>
 
-                            <TextBox IsReadOnly="True" Text="{Binding Name}" HorizontalAlignment="Stretch" BorderThickness="0" Background="Transparent" Foreground="{Binding Brush}" TextWrapping="Wrap"/>
+                            <TextBox IsReadOnly="True" Text="{Binding Name}" HorizontalAlignment="Stretch" BorderThickness="0" Background="Transparent" Foreground="{Binding Path=Brush}" TextWrapping="Wrap"/>
                             
                         </StackPanel>
                         <TextBlock FontSize="2.5"></TextBlock>
@@ -115,33 +115,33 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Border x:Name="Editing" Grid.Row="2" Grid.Column="2" Background="#363636" Opacity="0" Visibility="Hidden">
+        <Border x:Name="Editing" Grid.Row="2" Grid.Column="2" Background="{DynamicResource BackgroundEditBrushColor}" Opacity="0" Visibility="Hidden">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="8*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <StackPanel>
-                    <Border Background="#1f1f1f" CornerRadius="0, 0, 4, 4" Padding="4">
+                    <Border Background="{DynamicResource BackgroundEditingBrushColor}" CornerRadius="0, 0, 4, 4" Padding="4">
                         <TextBox IsReadOnly="True"  Background="Transparent" HorizontalAlignment="Center" BorderThickness="0" Text="{Binding ElementName=ActualName, Path=Text}" FontSize="24" VerticalAlignment="Center"></TextBox>
                     </Border>
                     
                     <TextBlock Text="gap" Opacity="0"></TextBlock>
                     <TextBlock Name="EditingNameBlock" Text="Название:" TextAlignment="Center" FontSize="20"></TextBlock>
                     <TextBlock Text="gap" Opacity="0" FontSize="12"></TextBlock>
-                    <Border Background="#2c2c2c" CornerRadius="4" Padding="4">
+                    <Border Background="{DynamicResource InputBoxBrushColor}" CornerRadius="4" Padding="4">
                         <TextBox x:Name="ActualName" HorizontalAlignment="Center" FontSize="18" VerticalAlignment="Center" Background="Transparent" BorderThickness="0"></TextBox>
                     </Border>
                     <TextBlock Text="gap" Opacity="0"></TextBlock>
                     <TextBlock Name="EditingPlaceBlock" Text="Место:" TextAlignment="Center" FontSize="20"></TextBlock>
                     <TextBlock Text="gap" Opacity="0" FontSize="12"></TextBlock>
-                    <Border Background="#2c2c2c" CornerRadius="4" Padding="4">
+                    <Border Background="{DynamicResource InputBoxBrushColor}" CornerRadius="4" Padding="4">
                         <TextBox x:Name="ActualPlace" HorizontalAlignment="Center" FontSize="18" VerticalAlignment="Center" Background="Transparent" BorderThickness="0"></TextBox>
                     </Border>
                     <TextBlock Text="gap" Opacity="0"></TextBlock>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <TextBlock Name="EditingWatchedBlock" Text="Просмотрено: " TextAlignment="Center" FontSize="20"></TextBlock>
-                        <Border Background="#2c2c2c" CornerRadius="5" Width="25" Height="25" BorderThickness="1" Name="ParentCheckBox">
+                        <Border Background="{DynamicResource InputBoxBrushColor}" CornerRadius="5" Width="25" Height="25" BorderThickness="1" Name="ParentCheckBox">
                             <CheckBox x:Name="ActualStatus" HorizontalAlignment="Center" Padding="8" Foreground="White" MouseEnter="CheckBoxMouseEnter" MouseLeave="CheckBoxMouseLeave" FontSize="18" VerticalAlignment="Center" Background="Transparent" BorderThickness="0">
                                 <CheckBox.Style>
                                     <Style TargetType="CheckBox">
@@ -192,7 +192,7 @@
         </Border>
 
         <Border  BorderBrush="Black" BorderThickness="0, 0.8, 0, 0" Grid.ColumnSpan="3" Grid.Row="2"/>
-        <Border Grid.Row="3" Background="#121212" Grid.ColumnSpan="3" Cursor="Hand" MouseDown="VersionMouseDown">
+        <Border Grid.Row="3" Background="{DynamicResource VersionMenuBrushColor}" Grid.ColumnSpan="3" Cursor="Hand" MouseDown="VersionMouseDown">
             <TextBlock Margin="10, 0" x:Name="VersionControl" Text="Version" FontSize="14" Foreground="#919191"/>
         </Border>
         
@@ -249,6 +249,20 @@
     </Grid>
     <Window.Resources>
 
+        <SolidColorBrush x:Key="WindowBackgroundBrushColor" Color="{DynamicResource BackgroundDarkerColor}"/>
+        <SolidColorBrush x:Key="VersionMenuBrushColor" Color="{DynamicResource BackgroundMoreDarkerColor}"/>
+        <SolidColorBrush x:Key="ListBackgroundBrushColor" Color="{DynamicResource BackgroundColor}"/>
+        <SolidColorBrush x:Key="ForegroundBrushColor" Color="{DynamicResource ForegroundColor}"/>
+        <SolidColorBrush x:Key="ForegroundDisabledBrushColor" Color="{DynamicResource ForegroundDisabledColor}"/>
+        <SolidColorBrush x:Key="BackgroundModelBrushColor" Color="{DynamicResource BackgroundModelColor}"/>
+        <SolidColorBrush x:Key="InputBoxBrushColor" Color="{DynamicResource InputBoxColor}"/>
+        <SolidColorBrush x:Key="BackgroundEditingBrushColor" Color="{DynamicResource BackgroundEditingColor}"/>
+        <SolidColorBrush x:Key="BackgroundEditBrushColor" Color="{DynamicResource BackgroundEditColor}"/>
+
+        <SolidColorBrush x:Key="ButtonEnabledBackgroundBrushColor" Color="{DynamicResource ButtonEnabledBackgroundColor}"/>
+        <SolidColorBrush x:Key="ButtonSelectedBackgroundBrushColor" Color="{DynamicResource ButtonSelectedBackgroundColor}"/>
+        <SolidColorBrush x:Key="ButtonDisabledBackgroundBrushColor" Color="{DynamicResource ButtonDisabledBackgroundColor}"/>
+
         <Storyboard x:Key="AppearBoard">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="NewContentPanel">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
@@ -286,13 +300,13 @@
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="FontFamily" Value="Verdana"/>
-                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrushColor}"/>
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Path=IsEnabled, RelativeSource={RelativeSource TemplatedParent }}" Value="True">
-                                                <Setter Property="Foreground" Value="White"/>
+                                                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrushColor}"/>
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding Path=IsEnabled, RelativeSource={RelativeSource TemplatedParent }}" Value="False">
-                                                <Setter Property="Foreground" Value="Gray"/>
+                                                <Setter Property="Foreground" Value="{DynamicResource ForegroundDisabledBrushColor}"/>
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -310,17 +324,17 @@
                         <Condition Property="IsMouseOver" Value="True"/>
                         <Condition Property="IsEnabled" Value="True"/>
                     </MultiTrigger.Conditions>
-                    <Setter Property="Background" Value="#222222"/>
+                    <Setter Property="Background" Value="{DynamicResource ButtonSelectedBackgroundBrushColor}"/>
                 </MultiTrigger>
                 <MultiTrigger>
                     <MultiTrigger.Conditions>
                         <Condition Property="IsMouseOver" Value="False"/>
                         <Condition Property="IsEnabled" Value="True"/>
                     </MultiTrigger.Conditions>
-                    <Setter Property="Background" Value="#1a1a1a"/>
+                    <Setter Property="Background" Value="{DynamicResource ButtonEnabledBackgroundBrushColor}"/>
                 </MultiTrigger>
                 <Trigger Property="IsEnabled" Value="False">
-                    <Setter Property="Background" Value="#121212"/>
+                    <Setter Property="Background" Value="{DynamicResource ButtonDisabledBackgroundBrushColor}"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
