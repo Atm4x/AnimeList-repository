@@ -6,9 +6,10 @@
     <Application.Resources>
         <Color x:Key="ForegroundColor">White</Color>
         <SolidColorBrush x:Key="ForegroundBrush" Color="{DynamicResource ForegroundColor}"/>
-        <Color x:Key="ForegroundWathcingColor">Khaki</Color>
+        <Color x:Key="ForegroundWatchingColor">Khaki</Color>
+        <Color x:Key="ExtraForeground">#BEBEBE</Color>
         <Color x:Key="InputBoxColor">#2c2c2c</Color>
-        <SolidColorBrush x:Key="ForegroundWatchingBrush" Color="{DynamicResource ForegroundWathcingColor}"/>
+        <!--<SolidColorBrush x:Key="ForegroundWatchingBrush" Color="{DynamicResource ForegroundWatchingColor}"/>-->
         <Color x:Key="ForegroundDisabledColor">Gray</Color>
         <Color x:Key="BackgroundDarkerColor">#1e1e1e</Color>
         <Color x:Key="BackgroundMoreDarkerColor">#121212</Color>
@@ -16,6 +17,17 @@
         <Color x:Key="BackgroundColor">#2b2b2b</Color>
         <Color x:Key="BackgroundEditingColor">#1f1f1f</Color>
         <Color x:Key="BackgroundEditColor">#363636</Color>
+
+        <Color x:Key="BackgroundLightColor">#515151</Color>
+        <!--<SolidColorBrush x:Key="InputBoxBrushColor" Color="{DynamicResource InputBoxColor}"/>-->
+
+
+        <!--<SolidColorBrush x:Key="ListBackgroundBrushColor" Color="{DynamicResource BackgroundColor}"/>-->
+
+        <Color x:Key="TabActiveColor">#3b3b3b</Color>
+        <SolidColorBrush x:Key="TabActiveBrush" Color="{DynamicResource TabActiveColor}"/>
+        <Color x:Key="TabPassiveColor">#262626</Color>
+        <SolidColorBrush x:Key="TabPassiveBrush" Color="{DynamicResource TabPassiveColor}"/>
 
 
         <Color x:Key="ButtonDisabledBackgroundColor">#121212</Color>
@@ -48,37 +60,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style TargetType="{x:Type MenuItem}">
-            <Setter Property="SnapsToDevicePixels" Value="True"/>
-            <Setter Property="OverridesDefaultStyle" Value="True"/>
-            <Setter Property="Foreground" Value="#BEBEBE"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type MenuItem}">
-                        <Grid Name="Root" Height="27" Background="{StaticResource MidBrsh}">
-                            <ContentPresenter Name="HeaderHost" Margin="10,0,10,0" ContentSource="Header" RecognizesAccessKey="True" HorizontalAlignment="Left" VerticalAlignment="Center"
-                                              TextOptions.TextRenderingMode="ClearType" TextBlock.FontSize="8" TextBlock.Foreground="{TemplateBinding Foreground}" TextOptions.TextFormattingMode="Display"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Root" Property="Background" Value="#505050"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Root" Property="Background" Value="#808080"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        
 
 
-        <Style TargetType="TextBox">
-            <Setter Property="FontFamily" Value="Verdana"/>
-            <Setter Property="CaretBrush" Value="{DynamicResource ForegroundBrush}"/>
-            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}"></Setter>
-            <Setter Property="FontSize" Value="20"/>
-        </Style>
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="Verdana"/>
             <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}"></Setter>
@@ -96,5 +80,7 @@
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="Background" Value="Transparent"/>
         </Style>
+
+
     </Application.Resources>
 </Application>

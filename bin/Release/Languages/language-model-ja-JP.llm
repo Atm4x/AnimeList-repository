@@ -6,6 +6,25 @@
     <LanguageCode>
         <Value>ja-JP</Value>
     </LanguageCode>
+    <ControlWindowName>
+        <Value>AniList：メインウィンドウ</Value>
+    </ControlWindowName>
+    <AddWindowName>
+        <Value>AniList: アニメを追加する</Value>
+    </AddWindowName>
+    <AddWindowDialogTranslate>
+        <ErrorMessage>エラー</ErrorMessage>
+        <InputNameMessage>名前間違い</InputNameMessage>
+        <InputPlaceMessage>不特定場所</InputPlaceMessage>
+        <InputExistsMessage>入力された名前がすでに行に存在する </InputExistsMessage>
+    </AddWindowDialogTranslate>
+    <AddTabWindowName>
+        <Value>AniList: リストを追加する</Value>
+    </AddTabWindowName>
+    <AddTabWindowDialogTranslate>
+        <WarningMessage>注目してほしい！</WarningMessage>
+        <ExistsMessage>このリストはすでにAniListに登録されています。</ExistsMessage>
+    </AddTabWindowDialogTranslate>
     <Translate>
         <FieldOfString Name="AddModelButton">
             <Value>追加</Value>
@@ -60,6 +79,12 @@
         </FieldOfString>
         <FieldOfString Name="ChangeLanguageItem">
             <Value>言語の変更</Value>
+        </FieldOfString>
+        <FieldOfString Name="CreateNewListButton">
+            <Value>新規作成 </Value>
+        </FieldOfString>
+        <FieldOfString Name="OpenListButton">
+            <Value>既存</Value>
         </FieldOfString>
     </Translate>
 </LanguageModel>

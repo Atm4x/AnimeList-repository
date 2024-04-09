@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AnimeList.Windows"
         mc:Ignorable="d"
         Title="AniList: Change Language" Height="450" Width="450">
-    <Grid Background="#2c2c2c">
+    <Grid Background="{DynamicResource MidBrsh}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="4*"></RowDefinition>
@@ -15,8 +15,8 @@
 
         <TextBlock Grid.Column="1" Grid.ColumnSpan="3" x:Name="LanguageText" Text="Language: ru-RU" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
 
-        <ListView x:Name="LanguagesList" SelectionChanged="SelectionChanged" Grid.Row="1" ItemContainerStyle="{StaticResource MyStyle}" ScrollViewer.PanningRatio="0.5"  ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                   Background="#2b2b2b" Margin="5 0 5 0" Padding="5" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#00000000" >
+        <ListView x:Name="LanguagesList" SelectionChanged="SelectionChanged" Grid.Row="1" ItemContainerStyle="{DynamicResource MyStyle}" ScrollViewer.PanningRatio="0.5"  ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                   Background="{DynamicResource ListBackgroundBrushColor}" Margin="5 0 5 0" Padding="5" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#00000000" >
 
             <ListView.ItemTemplate>
                 <DataTemplate >
@@ -25,7 +25,7 @@
                         <StackPanel Orientation="Horizontal" >
 
                             <TextBlock FontSize="2" Text="fFF" Opacity="0"></TextBlock>
-                            <TextBox IsReadOnly="True" Text="{Binding Path=LanguageName.Value}" HorizontalAlignment="Stretch" BorderThickness="0" Background="Transparent" Foreground="White" TextWrapping="Wrap"/>
+                            <TextBox IsReadOnly="True" Text="{Binding Path=LanguageName.Value}" HorizontalAlignment="Stretch" BorderThickness="0" Background="Transparent" Foreground="{DynamicResource ForegroundBrush}" TextWrapping="Wrap"/>
 
                         </StackPanel>
                         <TextBlock FontSize="2.5"></TextBlock>
@@ -34,8 +34,8 @@
             </ListView.ItemTemplate>
             </ListView>
 
-            <Border Grid.Column="2" Grid.Row="5" Background="#3c3c3c">
-            <Button Background="Transparent" Content="Change" Click="SaveChangesClicked"></Button>
+        <Border Grid.Column="2" Grid.Row="5" Background="{DynamicResource MidBrsh}">
+            <Button Background="Transparent" Content="Change" Click="SaveChangesClicked"/>
         </Border>
     </Grid>
 </Window>

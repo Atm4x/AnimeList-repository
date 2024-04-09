@@ -116,6 +116,7 @@
     <Compile Include="Models\AnimeListConfig.cs" />
     <Compile Include="Models\AnimeModel.cs" />
     <Compile Include="Models\AnimeModelStatus.cs" />
+    <Compile Include="Models\ColorSchemeModel.cs" />
     <Compile Include="Models\HistoryList.cs" />
     <Compile Include="Models\LanguageModel.cs" />
     <Compile Include="Models\TabModelList.cs" />
@@ -137,6 +138,12 @@
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Windows\Settings\Pages\GeneralSettingsPage.xaml.cs">
+      <DependentUpon>GeneralSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Settings\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\WarningWindow.xaml.cs">
       <DependentUpon>WarningWindow.xaml</DependentUpon>
@@ -175,6 +182,14 @@
     <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Settings\Pages\GeneralSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Settings\SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\WarningWindow.xaml" />
   </ItemGroup>

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\AniList\AnimeTopApp 1.3\AnimeList\obj\Release\
+Z:\AnimeTopApp 1.4\AnimeList\obj\Release\
 AnimeList
 none
 false
 TRACE
-D:\AniList\AnimeTopApp 1.3\AnimeList\App.xaml
-71926115512
+Z:\AnimeTopApp 1.4\AnimeList\App.xaml
+9-1408395933
 
-2616157490
-21-1165071133
-Controls\TabControl.xaml;Windows\AddTabChooseWindow.xaml;Windows\AddWindow.xaml;Windows\ChangeLanguageWindow.xaml;Windows\ControlWindow.xaml;Windows\MainWindow.xaml;Windows\WarningWindow.xaml;
+31-452809276
+21-1041880550
+Controls\TabControl.xaml;Windows\AddTabChooseWindow.xaml;Windows\AddWindow.xaml;Windows\ChangeLanguageWindow.xaml;Windows\ControlWindow.xaml;Windows\MainWindow.xaml;Windows\Settings\Pages\GeneralSettingsPage.xaml;Windows\Settings\SettingsWindow.xaml;Windows\WarningWindow.xaml;
 
-False
+True
 

@@ -1,0 +1,64 @@
+﻿<Window x:Class="AnimeList.Windows.Settings.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AnimeList.Windows.Settings"
+        mc:Ignorable="d"
+        Title="AniList: Настройки" Height="450" Width="800" MinWidth="800" MinHeight="450">
+    <Grid Background="{DynamicResource WindowBackgroundBrushColor}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox Background="{DynamicResource ListBackgroundBrushColor}" BorderThickness="0" x:Name="SettingList" SelectionMode="Single" SelectedIndex="0" 
+                     >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border HorizontalAlignment="Stretch" Padding="5">
+                        <TextBlock Background="Transparent" Text="{Binding Setting}" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{DynamicResource ForegroundBrush}"/>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Frame Grid.Column="1" Source="/Windows/Settings/Pages/GeneralSettingsPage.xaml" NavigationUIVisibility="Hidden">
+            
+        </Frame>
+    </Grid>
+    <Window.Resources>
+
+        <Style x:Key="_ListBoxItemStyle" TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Name="_Border"
+                                Padding="2"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="_Border" Property="Background" Value="{DynamicResource BackgroundModelBrushColor}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <SolidColorBrush x:Key="WindowBackgroundBrushColor" Color="{DynamicResource BackgroundDarkerColor}"/>
+        <SolidColorBrush x:Key="VersionMenuBrushColor" Color="{DynamicResource BackgroundMoreDarkerColor}"/>
+        <SolidColorBrush x:Key="ForegroundBrushColor" Color="{DynamicResource ForegroundColor}"/>
+        <SolidColorBrush x:Key="ForegroundDisabledBrushColor" Color="{DynamicResource ForegroundDisabledColor}"/>
+        <SolidColorBrush x:Key="BackgroundModelBrushColor" Color="{DynamicResource BackgroundModelColor}"/>
+        <SolidColorBrush x:Key="BackgroundEditingBrushColor" Color="{DynamicResource BackgroundEditingColor}"/>
+        <SolidColorBrush x:Key="BackgroundEditBrushColor" Color="{DynamicResource BackgroundEditColor}"/>
+        <SolidColorBrush x:Key="BackgroundLightBrush" Color="{DynamicResource BackgroundLightColor}"/>
+        <SolidColorBrush x:Key="InputBoxBrushColor" Color="{DynamicResource InputBoxColor}"/> 
+        <SolidColorBrush x:Key="ListBackgroundBrushColor" Color="{DynamicResource BackgroundColor}"/>
+        <SolidColorBrush x:Key="ButtonEnabledBackgroundBrushColor" Color="{DynamicResource ButtonEnabledBackgroundColor}"/>
+        <SolidColorBrush x:Key="ButtonSelectedBackgroundBrushColor" Color="{DynamicResource ButtonSelectedBackgroundColor}"/>
+        <SolidColorBrush x:Key="ButtonDisabledBackgroundBrushColor" Color="{DynamicResource ButtonDisabledBackgroundColor}"/>
+    </Window.Resources>
+</Window>

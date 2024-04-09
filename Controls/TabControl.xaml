@@ -10,13 +10,17 @@
              xmlns:Converters="clr-namespace:AnimeList.Converters">
     <Grid.Resources>
         <ResourceDictionary>
+
+            <SolidColorBrush x:Key="TabActiveBrush" Color="{DynamicResource TabActiveColor}"/>
+            <SolidColorBrush x:Key="TabPassiveBrush" Color="{DynamicResource TabPassiveColor}"/>
             <Converters:BoolToVisibilityConverter x:Key="BoolToVisibility" TrueValue="Hidden" FalseValue="Visible"></Converters:BoolToVisibilityConverter>
         </ResourceDictionary>
+        
     </Grid.Resources>
-    <Border x:Name="button" HorizontalAlignment="Left" Padding="5" Background="#3b3b3b" BorderBrush="Black" CornerRadius="15, 15, 0, 0"
+    <Border x:Name="button" HorizontalAlignment="Left" Padding="5" Background="{DynamicResource TabActiveBrush}" BorderBrush="Black" CornerRadius="15, 15, 0, 0"
             MouseDown="Activation" >
         <Border.ContextMenu>
-            <ContextMenu x:Name="CtxMenu" Style="{StaticResource MenuItemStyle}" Visibility="{Binding Converter={StaticResource BoolToVisibility}, Path=IsMain}">
+            <ContextMenu x:Name="CtxMenu" Style="{DynamicResource MenuItemStyle}" Visibility="{Binding Converter={StaticResource BoolToVisibility}, Path=IsMain}">
                 <MenuItem Header="Перейти к расположению" Click="ToTopFilenameClicked" ></MenuItem>
             </ContextMenu>
         </Border.ContextMenu>

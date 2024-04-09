@@ -20,6 +20,7 @@ using AnimeList.Controls;
 using AnimeList.Helpers;
 using AnimeList.Models;
 using AnimeList.Services;
+using AnimeList.Windows.Settings;
 using DiscordRPC;
 using Microsoft.Win32;
 using TabControl = AnimeList.Controls.TabControl;
@@ -109,6 +110,7 @@ namespace AnimeList.Windows
             }
 
             InitializeComponent();
+
             VersionControl.Text = $"{App.versionUpdate.VersionControl} ({App.versionUpdate.VersionCount})";
             TitleUpdate.Text = $"{App.versionUpdate.VersionTitle}";
             DescriptionUpdate.Text = $"{App.versionUpdate.VersionDescription}";
@@ -118,29 +120,29 @@ namespace AnimeList.Windows
             Models.AnimeList list = null;
             WarningWindow check = null;
 
-            //var listOfColorsRefs = new List<string>()
-            //{
-            //    "ForegroundColor",
-            //    "ForegroundWathcingColor",
-            //    "ForegroundDisabledColor",
-            //    "BackgroundDarkerColor",
-            //    "BackgroundMoreDarkerColor",
-            //    "BackgroundModelColor",
-            //    "MidColor",
-            //    "ButtonDisabledBackgroundColor",
-            //    "BackgroundColor",
-            //    "ButtonSelectedBackgroundColor",
-            //    "ButtonEnabledBackgroundColor",
-            //    "BackgroundEditingColor",
-            //    "InputBoxColor",
-            //    "BackgroundEditColor",
-            //};
-            //
-            //foreach (var item in listOfColorsRefs)
-            //{
-            //    App.Current.Resources[item] = (Color)ColorConverter.ConvertFromString(ColorHelper.InvertHexColor(App.Current.Resources[item].ToString()));
-            //}
-
+           //var listOfColorsRefs = new List<string>()
+           //{
+           //    "ForegroundColor",
+           //    "ForegroundWathcingColor",
+           //    "ForegroundDisabledColor",
+           //    "BackgroundDarkerColor",
+           //    "BackgroundMoreDarkerColor",
+           //    "BackgroundModelColor",
+           //    "MidColor",
+           //    "ButtonDisabledBackgroundColor",
+           //    "BackgroundColor",
+           //    "ButtonSelectedBackgroundColor",
+           //    "ButtonEnabledBackgroundColor",
+           //    "BackgroundEditingColor",
+           //    "InputBoxColor",
+           //    "BackgroundEditColor",
+           //};
+           //
+           //foreach (var item in listOfColorsRefs)
+           //{
+           //    App.Current.Resources[item] = (Color)ColorConverter.ConvertFromString(ColorHelper.InvertHexColor(App.Current.Resources[item].ToString()));
+           //}
+            //ColorSchemeModel.ChangeTheme(ColorSchemeModel.WhiteTheme);
 
 
             App.LanguageUpdated += LanguageUIUpdate;
@@ -768,6 +770,11 @@ namespace AnimeList.Windows
             {
                 var window = new ChangeLanguageWindow();
                 window.ShowDialog();
+            }
+            else if(tag == 3)
+            {
+                var window = new SettingsWindow();
+                window.Show();
             }
         }
 

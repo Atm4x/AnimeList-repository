@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AnimeList.Windows"
         mc:Ignorable="d"
         Title="AniList: Добавить аниме" Height="300" Width="400" WindowStartupLocation="CenterOwner" Closing="OnClosing">
-    <Grid Background="#2c2c2c" x:Name="WholePageGrid">
+    <Grid Background="{DynamicResource BackgroundBrushColor}" x:Name="WholePageGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="0.4*"></ColumnDefinition>
@@ -25,12 +25,16 @@
         </Grid.RowDefinitions>
 
         <TextBlock Name="EditingNameBlock" Grid.Column="1" Grid.ColumnSpan="3" Text="Название" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-        <TextBox x:Name="Name" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Background="#3c3c3c" BorderThickness="0" TextWrapping="Wrap"/>
+        <TextBox x:Name="Name" Grid.Column="1" Grid.ColumnSpan="3" BorderThickness="0.5" BorderBrush="Black" Grid.Row="1" Background="{DynamicResource InputBoxBrushColor}" TextWrapping="Wrap"/>
         <TextBlock Name="EditingPlaceBlock" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="2" Text="Место"  VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-        <TextBox x:Name="Place" Grid.Column="2" Grid.Row="3" BorderThickness="0" Background="#3c3c3c" TextWrapping="Wrap" Margin="15, 5, 15, 5"/>
+        <TextBox x:Name="Place" Grid.Column="2" Grid.Row="3" BorderThickness="0.5" BorderBrush="Black" Background="{DynamicResource InputBoxBrushColor}" TextWrapping="Wrap" Margin="15, 5, 15, 5"/>
         
-        <Border Grid.Column="2" Grid.Row="5" Background="#3c3c3c">
+        <Border Grid.Column="2" Grid.Row="5" Background="{DynamicResource MidBrsh}">
             <Button Name="AddModelButton" Background="Transparent" Content="Добавить" Click="AddClick"></Button>
         </Border>
     </Grid>
+    <Window.Resources>
+        <SolidColorBrush x:Key="BackgroundBrushColor" Color="{DynamicResource BackgroundEditColor}"/>
+        <SolidColorBrush x:Key="InputBoxBrushColor" Color="{DynamicResource InputBoxColor}"/>
+    </Window.Resources>
 </Window>

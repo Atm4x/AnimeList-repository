@@ -52,3 +52,7 @@ D:\AniList\AnimeTopApp 1.3\AnimeList\obj\Release\AnimeList.exe
 D:\AniList\AnimeTopApp 1.3\AnimeList\obj\Release\AnimeList.pdb
 D:\AniList\AnimeTopApp 1.3\AnimeList\obj\Release\Windows\ChangeLanguageWindow.g.cs
 D:\AniList\AnimeTopApp 1.3\AnimeList\obj\Release\Windows\ChangeLanguageWindow.baml
+D:\AniList\AnimeTopApp 1.3\AnimeList\obj\Release\Windows\Settings\SettingsWindow.g.cs
+D:\AniList\AnimeTopApp 1.3\AnimeList\obj\Release\Windows\Settings\SettingsWindow.baml
+D:\AniList\AnimeTopApp 1.3\AnimeList\obj\Release\Windows\Settings\Pages\GeneralSettingsPage.g.cs
+D:\AniList\AnimeTopApp 1.3\AnimeList\obj\Release\Windows\Settings\Pages\GeneralSettingsPage.baml

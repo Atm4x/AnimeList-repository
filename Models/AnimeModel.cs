@@ -256,6 +256,13 @@ namespace AnimeList.Models
         {
             Place = place;
             _Name = name;
+
+            ColorSchemeModel.ThemeChanged += () =>
+            {
+                Status = AnimeModelStatus.None;
+                Status = _Status;
+
+            };
         }
 
         public AnimeModel(int place, string name, AnimeModelStatus modelStatus = AnimeModelStatus.Finished)
@@ -263,6 +270,10 @@ namespace AnimeList.Models
             Place = place;
             _Name = name;
             Status = modelStatus;
+            ColorSchemeModel.ThemeChanged += () => {
+                Status = AnimeModelStatus.None;
+                //Status = _Status; 
+            };
         }
 
 
@@ -288,18 +299,23 @@ namespace AnimeList.Models
         private AnimeModelStatus _Status;
         public AnimeModelStatus Status { get => _Status; set
             {
-                Brush = value == AnimeModelStatus.Finished ? GetForegroundColor() : GetForegroundWathcingColor();
+                if (value == AnimeModelStatus.None)
+                {
+                    Brush = Brushes.Red;
+                    return;
+                }
+                Brush = value == AnimeModelStatus.InProcess ? GetForegroundWatchingColor() : GetForegroundColor();
                 _Status = value;
             } 
         }
 
         private static SolidColorBrush GetForegroundColor()
         {
-            return App.Current.Resources["ForegroundBrush"] as SolidColorBrush;
+            return new SolidColorBrush((Color)App.Current.Resources["ForegroundColor"]);
         }
-        private static SolidColorBrush GetForegroundWathcingColor()
+        private static SolidColorBrush GetForegroundWatchingColor()
         {
-            return App.Current.Resources["ForegroundWatchingBrush"] as SolidColorBrush;
+            return new SolidColorBrush((Color)App.Current.Resources["ForegroundWatchingColor"]);
         }
 
         [JsonIgnore]

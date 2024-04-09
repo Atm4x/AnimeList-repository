@@ -29,6 +29,7 @@ namespace AnimeList
         public static AddWindow window;
         public static VersionUpdate versionUpdate;
         public static HistoryList historyList;
+        public static int CurrentThemeId = ColorSchemeModel.Themes[1].ID;
 
         public delegate void LanguageUpdate(LanguageModel model);
         public static event LanguageUpdate LanguageUpdated;
@@ -48,6 +49,8 @@ namespace AnimeList
             historyList = new HistoryList();
 
             CheckUpdates();
+
+            ColorSchemeModel.ChangeTheme(CurrentThemeId);
 
             if (e.Args != default && e.Args.Length > 0)
             {
@@ -116,3 +119,38 @@ namespace AnimeList
         }
     }
 }
+
+
+
+//{ "ForegroundColor", "#000"},                       {"ForegroundColor", "#fff"},                      
+//{ "ForegroundWathcingColor", "#620f73"},            {"ForegroundWathcingColor", "#F0E68C"},
+//{ "InputBoxColor", "#f4f4f4"},                      {"InputBoxColor", "#2c2c2c"},
+//{ "ForegroundDisabledColor", "#999999"},            {"ForegroundDisabledColor", "#808080"},
+//{ "BackgroundDarkerColor", "#e0e0e0"},              {"BackgroundDarkerColor", "#1e1e1e"},
+//{ "BackgroundMoreDarkerColor", "#ffffff"},          {"BackgroundMoreDarkerColor", "#121212"},
+//{ "BackgroundModelColor", "#fefefe"},               {"BackgroundModelColor", "#333333"},
+//{ "MidColor", "#d6d6d6"},                           {"MidColor", "#2b2b2b"},
+//{ "ButtonDisabledBackgroundColor", "#e0e0e0"},      {"ButtonDisabledBackgroundColor", "#1f1f1f"},
+//{ "BackgroundColor", "#fefefe"},                    {"BackgroundColor", "#363636"},
+//{ "ButtonSelectedBackgroundColor", "#ffffff"},      {"ButtonSelectedBackgroundColor", "#121212"},
+//{ "ButtonEnabledBackgroundColor", "#f2f2f2"},       {"ButtonEnabledBackgroundColor", "#222222"},
+//{ "BackgroundEditingColor", "#e6e6e6"},             {"BackgroundEditingColor", "#1a1a1a"},
+//{ "BackgroundEditColor", "#fafafa"},                {"BackgroundEditColor", "#202020"},
+//{ "TabActiveColor", "#f2f2f2"},                     {"TabActiveColor", "#3b3b3b"},
+//{ "TabPassiveColor", "#c4c4c4"},                    {"TabPassiveColor", "#262626"},
+//{ "BackgroundLightColor", "#d6d6d6"},               {"BackgroundLightColor", "#515151"},
+//"ForegroundColor",
+//"ForegroundWathcingColor",
+//"ForegroundDisabledColor",
+//"BackgroundDarkerColor",
+//"BackgroundMoreDarkerColor",
+//"BackgroundModelColor",
+//"MidColor",
+//"ButtonDisabledBackgroundColor",
+//"BackgroundColor",
+//"ButtonSelectedBackgroundColor",
+//"ButtonEnabledBackgroundColor",
+//"BackgroundEditingColor",
+//"InputBoxColor",
+//"BackgroundEditColor",
+

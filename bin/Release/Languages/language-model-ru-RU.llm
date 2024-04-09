@@ -6,6 +6,25 @@
     <LanguageCode>
         <Value>ru-RU</Value>
     </LanguageCode>
+    <ControlWindowName>
+        <Value>AniList: Главное окно</Value>
+    </ControlWindowName>
+    <AddWindowName>
+        <Value>AniList: Добавить аниме</Value>
+    </AddWindowName>
+    <AddWindowDialogTranslate>
+        <ErrorMessage>Ошибка</ErrorMessage>
+        <InputNameMessage>Не введено название</InputNameMessage>
+        <InputPlaceMessage>Не введено место</InputPlaceMessage>
+        <InputExistsMessage>Введёное название уже присутствует в строке </InputExistsMessage>
+    </AddWindowDialogTranslate>
+    <AddTabWindowName>
+        <Value>AniList: Добавить список</Value>
+    </AddTabWindowName>
+    <AddTabWindowDialogTranslate>
+        <WarningMessage>Внимание!</WarningMessage>
+        <ExistsMessage>Этот список уже находится в AniList</ExistsMessage>
+    </AddTabWindowDialogTranslate>
     <Translate>
         <FieldOfString Name="AddModelButton">
             <Value>Добавить</Value>
@@ -60,6 +79,12 @@
         </FieldOfString>
         <FieldOfString Name="ChangeLanguageItem">
             <Value>Смена языка</Value>
+        </FieldOfString>
+        <FieldOfString Name="CreateNewListButton">
+            <Value>Создать список</Value>
+        </FieldOfString>
+        <FieldOfString Name="OpenListButton">
+            <Value>Открыть существующий</Value>
         </FieldOfString>
     </Translate>
 </LanguageModel>

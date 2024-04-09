@@ -39,7 +39,7 @@ namespace AnimeList.Controls
             Active = activeStatus;
             return Active;
         }
-        private string ActiveColors(bool ActiveStatus) => ActiveStatus ? "#3b3b3b" : "#262626";
+        private string ActiveColors(bool ActiveStatus) => ActiveStatus ? App.Current.Resources["TabActiveColor"].ToString() : App.Current.Resources["TabPassiveColor"].ToString();
         
 
         public TabControl(string Name, Models.AnimeList listConnected, bool isMain = false)
@@ -51,8 +51,16 @@ namespace AnimeList.Controls
             IsMain = isMain;
             CtxMenu.DataContext = this;
             xDelete.Tag = model.ListConnected;
-            
-            if(isMain) Panel.Children.Remove(xDelete);
+            ColorSchemeModel.ThemeChanged += () =>
+            {
+                button.Background = new SolidColorBrush(
+                    (Color)ColorConverter.ConvertFromString(
+                        ActiveColors(Active)));
+                TabName.Foreground = new SolidColorBrush((Color)App.Current.Resources["ForegroundColor"]);
+            };
+
+            if (isMain) 
+                Panel.Children.Remove(xDelete);
 
 
         }

@@ -6,6 +6,26 @@
     <LanguageCode>
         <Value>en-US</Value>
     </LanguageCode>
+    <ControlWindowName>
+        <Value>AniList: Main window</Value>
+    </ControlWindowName>
+    <AddWindowName>
+        <Value>AniList: Add anime</Value>
+    </AddWindowName>
+    <AddWindowDialogTranslate>
+        <ErrorMessage>Error</ErrorMessage>
+        <InputNameMessage>No name entered</InputNameMessage>
+        <InputPlaceMessage>No place entered</InputPlaceMessage>
+        <InputExistsMessage>The entered name is already present in the list </InputExistsMessage>    
+    </AddWindowDialogTranslate>
+    <AddTabWindowName>
+        <Value>AniList: Add list</Value>
+    </AddTabWindowName>
+    <AddTabWindowDialogTranslate>
+        <WarningMessage>Warning!</WarningMessage>
+        <ExistsMessage>This list is already in AniList</ExistsMessage>
+    </AddTabWindowDialogTranslate>
+
     <Translate>
         <FieldOfString Name="AddModelButton">
             <Value>Add</Value>
@@ -60,6 +80,12 @@
         </FieldOfString>
         <FieldOfString Name="ChangeLanguageItem">
             <Value>Language change</Value>
+        </FieldOfString>
+        <FieldOfString Name="CreateNewListButton">
+            <Value>Create new list</Value>
+        </FieldOfString>
+        <FieldOfString Name="OpenListButton">
+            <Value>Open an existing</Value>
         </FieldOfString>
     </Translate>
 </LanguageModel>
