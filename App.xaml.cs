@@ -50,8 +50,6 @@ namespace AnimeList
 
             CheckUpdates();
 
-            ColorSchemeModel.ChangeTheme(CurrentThemeId);
-
             if (e.Args != default && e.Args.Length > 0)
             {
                 this.Properties["ArbitraryArgName"] = e.Args[0];

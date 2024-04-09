@@ -48,13 +48,13 @@ namespace AnimeList.Helpers
             if (File.Exists(directory))
             {
                 var encrypted = Decrypt(File.ReadAllText(directory));
-                var text = JsonSerializer.Deserialize<AnimeListConfig>(encrypted, new JsonSerializerOptions()
+                var result = JsonSerializer.Deserialize<AnimeListConfig>(encrypted, new JsonSerializerOptions()
                 {
                     PropertyNameCaseInsensitive = false,
                     IncludeFields = true
                 });
-                App.Configuration = text;
-                return text;
+                App.Configuration = result;
+                return result;
             }
                 
             File.Create(directory).Close();

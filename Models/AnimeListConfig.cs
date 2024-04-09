@@ -14,10 +14,13 @@ namespace AnimeList.Models
     {
         [JsonInclude]
         public List<Config> Configs;
+
+        public int ThemeId { get; set; }
         
         public AnimeListConfig()
         {
             Configs = new List<Config>();
+            ThemeId = 1;
         }
 
         public Config FindConfig(AnimeList list)

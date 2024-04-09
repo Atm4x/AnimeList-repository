@@ -116,7 +116,10 @@ namespace AnimeList.Windows
             DescriptionUpdate.Text = $"{App.versionUpdate.VersionDescription}";
 
             AnimeListConfig configuration = ConfigCipher.ReadConfigCipher();
-            
+
+            App.CurrentThemeId = configuration.ThemeId;
+            ColorSchemeModel.ChangeTheme(App.CurrentThemeId);
+
             Models.AnimeList list = null;
             WarningWindow check = null;
 

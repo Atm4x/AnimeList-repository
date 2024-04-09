@@ -1,4 +1,5 @@
-﻿using AnimeList.Models;
+﻿using AnimeList.Helpers;
+using AnimeList.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,6 +57,8 @@ namespace AnimeList.Windows.Settings.Pages
                 ColorSchemeModel.ThemeChanged += ThemeChangeFinished;
                 App.CurrentThemeId = selectedTheme.Id; 
                 ColorSchemeModel.ChangeTheme(selectedTheme.Id);
+                App.Configuration.ThemeId = selectedTheme.Id;
+                ConfigCipher.WriteConfigCipher();
             }
         }
 

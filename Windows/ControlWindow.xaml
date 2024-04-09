@@ -107,7 +107,7 @@
                             <Image Source="/Images/rsz_watching.png" Visibility="{Binding Watching}" Stretch="Fill" MaxHeight="{Binding ElementName=PlaceBorder, Path=ActualHeight}"/>
                             <TextBlock FontSize="2" Text="fFF" Opacity="0"></TextBlock>
 
-                            <TextBox IsReadOnly="True" Text="{Binding Name}" HorizontalAlignment="Stretch" BorderThickness="0" Background="Transparent" Foreground="{Binding Path=Brush, Mode=TwoWay}" TextWrapping="Wrap"/>
+                            <TextBox IsReadOnly="True" Text="{Binding Name}" HorizontalAlignment="Stretch" BorderThickness="0" Background="Transparent" Foreground="{Binding Path=Brush}" TextWrapping="Wrap"/>
                             
                         </StackPanel>
                         <TextBlock FontSize="2.5"></TextBlock>
@@ -201,11 +201,11 @@
             <TextBlock Name="CopiedPopupMessage" Text="Скопировано" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
 
-        <Border x:Name="Synchronize" MaxWidth="500" Grid.ColumnSpan="3" BorderBrush="Black" BorderThickness="1" Grid.RowSpan="4" Margin="30, -2000, 30, 30" Background="{DynamicResource BackgroundLightBrush}" CornerRadius="15" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="600" Padding="10">
+        <Border x:Name="Synchronize" MaxWidth="500" Grid.ColumnSpan="3" BorderBrush="Black" BorderThickness="1" Grid.RowSpan="4" Margin="30, -2000, 30, 30" Background="{DynamicResource BackgroundLightBrushColor}" CornerRadius="15" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="600" Padding="10">
             <StackPanel>
                 <Grid>
                     <Border Style="{DynamicResource MainBtns}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Padding="10 5 10 5" MouseDown="BackButtonOnWiFiPanelClicked" CornerRadius="20">
-                        <TextBlock Name="SynchronizeBackButton" Text="Назад"/>
+                        <TextBlock Name="SynchronizeBackButton" Foreground="{DynamicResource ForegroundBrushColor}" Text="Назад"/>
                     </Border>
                     <Border  HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="200" Margin="0, 20, 0, 0" CornerRadius="100" Background="White">
                         <Grid>
@@ -215,15 +215,15 @@
                         </Grid>
                     </Border>
                 </Grid>
-                <TextBlock Name="SynchronizePageTitle" Text="Синхронизация по Wi-Fi" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 10 0 0" TextWrapping="Wrap" FontSize="30"/>
-                <TextBlock Name="SynchronizePageHelp" TextWrapping="WrapWithOverflow" Background="Transparent" FontStyle="Italic" TextAlignment="Center" Text="Для синхронизации по Wi-Fi требуется подключение к общей сети. Для подключения введите следующий код на втором устройстве:" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"  FontSize="16"/>
+                <TextBlock Name="SynchronizePageTitle" Foreground="{DynamicResource ForegroundBrushColor}" Text="Синхронизация по Wi-Fi" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 10 0 0" TextWrapping="Wrap" FontSize="30"/>
+                <TextBlock Name="SynchronizePageHelp" Foreground="{DynamicResource ForegroundBrushColor}" TextWrapping="WrapWithOverflow" Background="Transparent" FontStyle="Italic" TextAlignment="Center" Text="Для синхронизации по Wi-Fi требуется подключение к общей сети. Для подключения введите следующий код на втором устройстве:" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"  FontSize="16"/>
                 <Border Background="{DynamicResource InputBoxBrushColor}">
-                    <TextBox IsReadOnly="True" x:Name="LocalWifiCode" Text="C0denE" Background="Transparent" BorderThickness="0" TextAlignment="Center" FontSize="40" FontWeight="DemiBold"/>
+                    <TextBox IsReadOnly="True" x:Name="LocalWifiCode" Foreground="{DynamicResource ForegroundBrushColor}" Text="C0denE" Background="Transparent" BorderThickness="0" TextAlignment="Center" FontSize="40" FontWeight="DemiBold"/>
                 </Border>
-                <TextBlock Name="SynchronizePageOtherwise" FontSize="20" Text="Или же, введите уже имеющийся код в поле ниже:" Margin="10" TextAlignment="Center" FontStyle="Italic"/>
-                <TextBox x:Name="WiFiCodeEntering" Background="{DynamicResource InputBoxBrushColor}" FontSize="20" Margin="0 10 0 10" HorizontalAlignment="Center" Width="300" Padding="0 5 0 5"/>
-                <Border VerticalAlignment="Center" HorizontalAlignment="Center" Style="{DynamicResource MainBtns}" CornerRadius="15" Padding="15, 5">
-                    <Button Name="SynchronizePageEnterButton" Content="Ввести" Background="Transparent" Padding="5"  Click="EnteredWiFiCode" FontSize="30"/>
+                <TextBlock Name="SynchronizePageOtherwise" FontSize="20" Foreground="{DynamicResource ForegroundBrushColor}" Text="Или же, введите уже имеющийся код в поле ниже:" Margin="10" TextAlignment="Center" FontStyle="Italic"/>
+                <TextBox x:Name="WiFiCodeEntering" Foreground="{DynamicResource ForegroundBrushColor}" Background="{DynamicResource InputBoxBrushColor}" FontSize="20" Margin="0 10 0 10" HorizontalAlignment="Center" Width="300" Padding="0 5 0 5"/>
+                <Border VerticalAlignment="Center"  HorizontalAlignment="Center" Style="{DynamicResource MainBtns}" CornerRadius="15" Padding="15, 5">
+                    <Button Name="SynchronizePageEnterButton" Foreground="{DynamicResource ForegroundBrushColor}" Content="Ввести" Background="Transparent" Padding="5"  Click="EnteredWiFiCode" FontSize="30"/>
                 </Border>
             </StackPanel>
         </Border>
@@ -258,13 +258,14 @@
         <SolidColorBrush x:Key="BackgroundModelBrushColor" Color="{DynamicResource BackgroundModelColor}"/>
         <SolidColorBrush x:Key="BackgroundEditingBrushColor" Color="{DynamicResource BackgroundEditingColor}"/>
         <SolidColorBrush x:Key="BackgroundEditBrushColor" Color="{DynamicResource BackgroundEditColor}"/>
-        <SolidColorBrush x:Key="BackgroundLightBrush" Color="{DynamicResource BackgroundLightColor}"/>
+        <SolidColorBrush x:Key="BackgroundLightBrushColor" Color="{DynamicResource BackgroundLightColor}"/>
         <SolidColorBrush x:Key="ListBackgroundBrushColor" Color="{DynamicResource BackgroundColor}"/>
         <SolidColorBrush x:Key="InputBoxBrushColor" Color="{DynamicResource InputBoxColor}"/>
         <SolidColorBrush x:Key="ButtonEnabledBackgroundBrushColor" Color="{DynamicResource ButtonEnabledBackgroundColor}"/>
         <SolidColorBrush x:Key="ButtonSelectedBackgroundBrushColor" Color="{DynamicResource ButtonSelectedBackgroundColor}"/>
         <SolidColorBrush x:Key="ButtonDisabledBackgroundBrushColor" Color="{DynamicResource ButtonDisabledBackgroundColor}"/>
 
+        <SolidColorBrush x:Key="MidBrsh" Color="{DynamicResource MidColor}"/>
 
         <SolidColorBrush x:Key="TabActiveBrush" Color="{DynamicResource TabActiveColor}"/>
         <SolidColorBrush x:Key="TabPassiveBrush" Color="{DynamicResource TabPassiveColor}"/>

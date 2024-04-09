@@ -257,12 +257,7 @@ namespace AnimeList.Models
             Place = place;
             _Name = name;
 
-            ColorSchemeModel.ThemeChanged += () =>
-            {
-                Status = AnimeModelStatus.None;
-                Status = _Status;
-
-            };
+            ColorSchemeModel.ThemeChanged += () => Status = _Status;
         }
 
         public AnimeModel(int place, string name, AnimeModelStatus modelStatus = AnimeModelStatus.Finished)
@@ -270,10 +265,7 @@ namespace AnimeList.Models
             Place = place;
             _Name = name;
             Status = modelStatus;
-            ColorSchemeModel.ThemeChanged += () => {
-                Status = AnimeModelStatus.None;
-                //Status = _Status; 
-            };
+            ColorSchemeModel.ThemeChanged += () => Status = _Status; 
         }
 
 
@@ -299,11 +291,6 @@ namespace AnimeList.Models
         private AnimeModelStatus _Status;
         public AnimeModelStatus Status { get => _Status; set
             {
-                if (value == AnimeModelStatus.None)
-                {
-                    Brush = Brushes.Red;
-                    return;
-                }
                 Brush = value == AnimeModelStatus.InProcess ? GetForegroundWatchingColor() : GetForegroundColor();
                 _Status = value;
             } 

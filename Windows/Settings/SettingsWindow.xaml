@@ -16,7 +16,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border HorizontalAlignment="Stretch" Padding="5">
-                        <TextBlock Background="Transparent" Text="{Binding Setting}" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{DynamicResource ForegroundBrush}"/>
+                        <TextBlock Background="Transparent" Text="{Binding Setting}" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{DynamicResource ForegroundBrushColor}"/>
                     </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>
