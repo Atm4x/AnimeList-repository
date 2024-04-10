@@ -104,3 +104,11 @@ Z:\AnimeTopApp 1.4\AnimeList\obj\Debug\AnimeList.csproj.GenerateResource.cache
 Z:\AnimeTopApp 1.4\AnimeList\obj\Debug\AnimeList.csproj.CoreCompileInputs.cache
 Z:\AnimeTopApp 1.4\AnimeList\obj\Debug\AnimeList.csproj.CopyComplete
 Z:\AnimeTopApp 1.4\AnimeList\obj\Debug\AnimeList.exe
+Z:\AnimeTopApp 1.4\AnimeList\obj\Debug\Controls\ActionVisuals\AddActionVisual.g.cs
+Z:\AnimeTopApp 1.4\AnimeList\obj\Debug\Controls\ActionVisuals\EditActionVisual.g.cs
+Z:\AnimeTopApp 1.4\AnimeList\obj\Debug\Controls\ActionVisuals\RemoveActionVisual.g.cs
+Z:\AnimeTopApp 1.4\AnimeList\obj\Debug\Windows\HistoryWindow.g.cs
+Z:\AnimeTopApp 1.4\AnimeList\obj\Debug\Controls\ActionVisuals\AddActionVisual.baml
+Z:\AnimeTopApp 1.4\AnimeList\obj\Debug\Controls\ActionVisuals\EditActionVisual.baml
+Z:\AnimeTopApp 1.4\AnimeList\obj\Debug\Controls\ActionVisuals\RemoveActionVisual.baml
+Z:\AnimeTopApp 1.4\AnimeList\obj\Debug\Windows\HistoryWindow.baml

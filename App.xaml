@@ -17,7 +17,7 @@
         <Color x:Key="BackgroundColor">#2b2b2b</Color>
         <Color x:Key="BackgroundEditingColor">#1f1f1f</Color>
         <Color x:Key="BackgroundEditColor">#363636</Color>
-
+        <Color x:Key="FindingColor">#55f44931</Color>
         <Color x:Key="BackgroundLightColor">#515151</Color>
         <!--<SolidColorBrush x:Key="InputBoxBrushColor" Color="{DynamicResource InputBoxColor}"/>-->
 

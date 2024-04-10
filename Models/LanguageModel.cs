@@ -58,7 +58,20 @@ namespace LanguageClassTest.Models
         [XmlElement("AddTabWindowDialogTranslate")]
         public AddTabChooseWindowDialogMessages AddTabWindowDialogTranslate { get; set; } = new AddTabChooseWindowDialogMessages();
 
+        [XmlElement("SettingsWindowName")]
+        public Field<string> SettingsWindowTitle { get; set; } = "AniList: Настройки";
 
+        [XmlElement("SettingsWindowMessages")]
+        public SettingsWindowMessages SettingsWindowMessagesTranslate { get; set; } = new SettingsWindowMessages();
+
+        [XmlElement("HistoryWindowTitle")]
+        public Field<string> HistoryWindowTitle { get; set; } = "AniList: История изменений";
+
+        [XmlElement("HistoryWindowActions")]
+        public ActionMessages HistoryWindowActionsTranslate { get; set; } = new ActionMessages();
+
+        [XmlElement("ThemesTitles")]
+        public ThemesTitles ThemesTitlesTranslate { get; set; } = new ThemesTitles();
 
         [XmlArray()]
         public List<Field<string>> Translate { get; set; } =
@@ -84,8 +97,35 @@ namespace LanguageClassTest.Models
             ("ChangeLanguageItem", "Смена языка"),
             ("CreateNewListButton", "Создать список"),
             ("OpenListButton", "Открыть существующий"),
+            ("SettingContextItem", "Настройки"),
+            ("HistoryOfChanges", "История изменений"),
+            ("GeneralSettingsTitle", "Общие настройки"),
+            ("HistoryChangesTitle", "История изменений за сессию"),
+            ("TopTitle", "Топы"),
         };
 
+        public class SettingsWindowMessages
+        {
+            public string General { get; set; } = "Общие";
+        }
+
+        public class ActionMessages
+        {
+            public string AddMessage { get; set; } = "Добавление аниме";
+            public string RemoveMessage { get; set; } = "Удаление аниме";
+            public string EditMessage { get; set; } = "Изменение аниме";
+            public string WiFiMessage { get; set; } = "Синхронизация по Wi-Fi";
+        }
+
+        public class ThemesTitles
+        {
+            public string DarkTheme { get; set; } = "Тёмная тема";
+            public string LightTheme { get; set; } = "Светлая тема";
+            public string USSRTheme { get; set; } = "Тема СССР";
+            public string WaterfallTheme { get; set; } = "Тема водопада";
+            public string LoveTheme { get; set; } = "Любовная тема";
+            public string JungleTheme { get; set; } = "Тема джунглей";
+        }
 
         public class AddWindowDialogMessages
         {

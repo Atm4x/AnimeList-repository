@@ -15,7 +15,7 @@ namespace AnimeList.Models
         [JsonInclude]
         public List<Config> Configs;
 
-        public int ThemeId { get; set; }
+        public int ThemeId { get; set; } = 1;
         
         public AnimeListConfig()
         {

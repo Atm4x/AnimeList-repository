@@ -80,7 +80,8 @@
                             </ContextMenu.ItemContainerStyle>
                             <MenuItem Name="ExtraSynchronizeContextItem" Tag="1" Header="Синхронизация"/>
                             <MenuItem Name="ChangeLanguageItem" Tag="2" Header="Смена языка"/>
-                            <MenuItem Name="SettingContextItem" Tag="3" Header="Настройки"/>
+                            <MenuItem Name="HistoryOfChanges" Tag="3" Header="История изменений"/>
+                            <MenuItem Name="SettingContextItem" Tag="4" Header="Настройки"/>
                             
                         </ContextMenu>
                     </Border.ContextMenu>
@@ -107,7 +108,7 @@
                             <Image Source="/Images/rsz_watching.png" Visibility="{Binding Watching}" Stretch="Fill" MaxHeight="{Binding ElementName=PlaceBorder, Path=ActualHeight}"/>
                             <TextBlock FontSize="2" Text="fFF" Opacity="0"></TextBlock>
 
-                            <TextBox IsReadOnly="True" Text="{Binding Name}" HorizontalAlignment="Stretch" BorderThickness="0" Background="Transparent" Foreground="{Binding Path=Brush}" TextWrapping="Wrap"/>
+                            <TextBox IsReadOnly="True" Text="{Binding Name}" HorizontalAlignment="Stretch" BorderThickness="0" Background="{Binding InFindingColor}" Foreground="{Binding Path=Brush}" TextWrapping="Wrap"/>
                             
                         </StackPanel>
                         <TextBlock FontSize="2.5"></TextBlock>
@@ -196,8 +197,25 @@
         <Border Grid.Row="3" Background="{DynamicResource VersionMenuBrushColor}" Grid.ColumnSpan="3" Cursor="Hand" MouseDown="VersionMouseDown">
             <TextBlock Margin="10, 0" x:Name="VersionControl" Text="Version" FontSize="14" Foreground="#919191"/>
         </Border>
-        
-        <Border Grid.RowSpan="3" Visibility="Hidden" Grid.ColumnSpan="3" x:Name="CopiedMark" Background="#3d3d3d" CornerRadius="5" Opacity="0" VerticalAlignment="Top" HorizontalAlignment="Left">
+
+        <Border x:Name="FindingPanel" Visibility="Hidden" CornerRadius="5" BorderThickness="0.5" Padding="3" BorderBrush="{DynamicResource ForegroundBrushColor}" Grid.Row="2" Grid.Column="2" VerticalAlignment="Top" MaxWidth="210" HorizontalAlignment="Right" Background="{DynamicResource BackgroundEditingBrushColor}" Margin="0, 10, 10, 0">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Background="Transparent" MouseDown="FindingCloseClicked">
+                        <TextBlock Text="×" FontSize="12" TextAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundBrush}"/>
+                    </Border>
+                    <TextBlock Text="Поиск по названию:" Grid.Column="1" VerticalAlignment="Center" TextAlignment="Center" FontSize="12" Foreground="{DynamicResource ForegroundBrushColor}" />
+                </Grid>
+                <TextBox x:Name="FindingBox" BorderBrush="Transparent" Background="Transparent" Text="..." Padding="5"  HorizontalScrollBarVisibility="Hidden" Foreground="{DynamicResource ForegroundBrushColor}" TextChanged="FindingTextChanged" FontSize="17"/>
+                <TextBlock x:Name="FoundCountText" Text="Найдено соответветствий: 0" FontSize="12" Foreground="{DynamicResource ForegroundDisabledBrushColor}" />
+            </StackPanel>
+        </Border>
+
+        <Border Grid.RowSpan="3" Visibility="Hidden" Grid.ColumnSpan="3" x:Name="CopiedMark" Background="{DynamicResource BackgroundModelBrushColor}" CornerRadius="5" Opacity="0" VerticalAlignment="Top" HorizontalAlignment="Left">
             <TextBlock Name="CopiedPopupMessage" Text="Скопировано" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
 
@@ -228,6 +246,7 @@
             </StackPanel>
         </Border>
 
+        
         <Border x:Name="NewContentPanel" Visibility="Hidden" Opacity="1" Grid.RowSpan="4" Grid.ColumnSpan="3" Background="#bb000000">
             <Border Margin="180 80"  Background="{DynamicResource WindowBackgroundBrushColor}" CornerRadius="10" BorderThickness="15" BorderBrush="{DynamicResource VersionMenuBrushColor}" Padding="20">
                 <Grid>

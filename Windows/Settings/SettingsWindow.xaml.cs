@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AnimeList.Services;
+using LanguageClassTest.Models;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace AnimeList.Windows.Settings
 {
-    /// <summary>
-    /// Логика взаимодействия для SettingsWindow.xaml
-    /// </summary>
     public partial class SettingsWindow : Window
     {
         public class ViewItem
@@ -41,9 +41,15 @@ namespace AnimeList.Windows.Settings
             InitializeComponent();
             Items = new List<ViewItem>()
             {
-                ("Общие", 1)
+                (App.CurrentLanguage.SettingsWindowMessagesTranslate.General, 1)
             };
-            SettingList.ItemsSource = Items;
+            SettingList.ItemsSource = Items; 
+            UIChangeLanguage(App.CurrentLanguage);
+        }
+
+        public void UIChangeLanguage(LanguageModel lang)
+        {
+            Title = lang.SettingsWindowTitle.Value;
         }
     }
 }

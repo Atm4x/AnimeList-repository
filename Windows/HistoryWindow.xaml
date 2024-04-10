@@ -1,0 +1,93 @@
+﻿<Window x:Class="AnimeList.Windows.HistoryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AnimeList.Windows"
+        mc:Ignorable="d"
+        Title="AniList: История изменений" Height="450" Width="800">
+    <Grid Background="{DynamicResource BackgroundModelBrushColor}" x:Name="WholeGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="0" Text="Топы" TextAlignment="Center" Name="TopTitle"/>
+        <TextBlock Grid.Column="1" Text="Изменения в топе за сессию" Name="HistoryChangesTitle" TextAlignment="Center"/>
+
+        <ListBox Background="{DynamicResource ListBackgroundBrushColor}" SelectionChanged="SelectedSomething" Grid.Row="1" BorderThickness="0" x:Name="HistoryModelsList" SelectionMode="Single" SelectedIndex="0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border HorizontalAlignment="Stretch" Padding="5">
+                        <TextBlock Background="Transparent" Text="{Binding Path=Tab.NameTab}" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{DynamicResource ForegroundBrushColor}"/>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ListBox Background="{DynamicResource WindowBackgroundBrushColor}" SelectionChanged="SelectionOfAction" BorderThickness="0" x:Name="HistoryChanges" SelectionMode="Single" SelectedIndex="0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border HorizontalAlignment="Stretch" Padding="5">
+                            <TextBlock Background="Transparent" Text="{Binding Name}" HorizontalAlignment="Center" TextAlignment="Center" Foreground="{DynamicResource ForegroundBrushColor}"/>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Border Grid.Row="1" Background="Transparent">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="4*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Изменение" x:Name="ChangeInfoTitle" TextAlignment="Center"/>
+                    <Border Grid.Row="1" x:Name="VisualActionView"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+    <Window.Resources>
+
+        <Style x:Key="_ListBoxItemStyle" TargetType="ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Name="_Border"
+                                Padding="2"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter TargetName="_Border" Property="Background" Value="{DynamicResource BackgroundModelBrushColor}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <SolidColorBrush x:Key="WindowBackgroundBrushColor" Color="{DynamicResource BackgroundDarkerColor}"/>
+        <SolidColorBrush x:Key="VersionMenuBrushColor" Color="{DynamicResource BackgroundMoreDarkerColor}"/>
+        <SolidColorBrush x:Key="ForegroundBrushColor" Color="{DynamicResource ForegroundColor}"/>
+        <SolidColorBrush x:Key="ForegroundDisabledBrushColor" Color="{DynamicResource ForegroundDisabledColor}"/>
+        <SolidColorBrush x:Key="BackgroundModelBrushColor" Color="{DynamicResource BackgroundModelColor}"/>
+        <SolidColorBrush x:Key="BackgroundEditingBrushColor" Color="{DynamicResource BackgroundEditingColor}"/>
+        <SolidColorBrush x:Key="BackgroundEditBrushColor" Color="{DynamicResource BackgroundEditColor}"/>
+        <SolidColorBrush x:Key="BackgroundLightBrush" Color="{DynamicResource BackgroundLightColor}"/>
+        <SolidColorBrush x:Key="InputBoxBrushColor" Color="{DynamicResource InputBoxColor}"/>
+        <SolidColorBrush x:Key="ListBackgroundBrushColor" Color="{DynamicResource BackgroundColor}"/>
+        <SolidColorBrush x:Key="ButtonEnabledBackgroundBrushColor" Color="{DynamicResource ButtonEnabledBackgroundColor}"/>
+        <SolidColorBrush x:Key="ButtonSelectedBackgroundBrushColor" Color="{DynamicResource ButtonSelectedBackgroundColor}"/>
+        <SolidColorBrush x:Key="ButtonDisabledBackgroundBrushColor" Color="{DynamicResource ButtonDisabledBackgroundColor}"/>
+    </Window.Resources>
+</Window>

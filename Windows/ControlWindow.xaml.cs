@@ -16,6 +16,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 using AnimeList.Controls;
 using AnimeList.Helpers;
 using AnimeList.Models;
@@ -110,7 +111,6 @@ namespace AnimeList.Windows
             }
 
             InitializeComponent();
-
             VersionControl.Text = $"{App.versionUpdate.VersionControl} ({App.versionUpdate.VersionCount})";
             TitleUpdate.Text = $"{App.versionUpdate.VersionTitle}";
             DescriptionUpdate.Text = $"{App.versionUpdate.VersionDescription}";
@@ -118,7 +118,6 @@ namespace AnimeList.Windows
             AnimeListConfig configuration = ConfigCipher.ReadConfigCipher();
 
             App.CurrentThemeId = configuration.ThemeId;
-            ColorSchemeModel.ChangeTheme(App.CurrentThemeId);
 
             Models.AnimeList list = null;
             WarningWindow check = null;
@@ -153,6 +152,7 @@ namespace AnimeList.Windows
             App.Languages = LanguagesHelper.GetAllLanguagesModel().ToList();
             var rus = App.Languages.FirstOrDefault(x => x.Code.Value.Equals("ru-RU"));
             App.ChangeLanguage(rus ?? new LanguageClassTest.Models.LanguageModel());
+            ColorSchemeModel.ChangeTheme(App.CurrentThemeId);
 
             ALCipher.Cipher cipher1 = null;
 
@@ -211,12 +211,12 @@ namespace AnimeList.Windows
                         Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
                         WriteIndented = true
                     };
+
+                    App.MainTab = new TabControl(cipher2.Name, list, true);
                     ALCipher.WriteCipher(new ALCipher.Cipher()
                         { Name = "Default", EncryptionText = JsonSerializer.Serialize(App.list.TabList[0].model.ListConnected, options) });
 
-
-                    App.MainTab = new TabControl(cipher2.Name, list, true);
-                    AnimeList.ItemsSource = list.GetModels();
+                AnimeList.ItemsSource = list.GetModels();
                 }
             
             AnimeList.SelectionChanged += AnimeListOnSelectionChanged;
@@ -735,6 +735,120 @@ namespace AnimeList.Windows
                     }
 
                     AnimeList.ItemsSource = App.list.GetActive().model.ListConnected.GetModels();
+                } else if (Keyboard.IsKeyDown(Key.F))
+                {
+                    OpenFindingPanel();
+                }
+            } 
+            else if (Keyboard.IsKeyDown(Key.F3))
+            {
+                OpenFindingPanel();
+            } 
+            else if( Keyboard.IsKeyDown(Key.Escape))
+            {
+                if(_findingPanelOpened)
+                {
+                    HideFindingPanel();
+                }
+            } 
+            else
+            {
+                if(_findingPanelOpened)
+                {
+                    FocusOnFindingPanel();
+                }
+            }
+        }
+
+        private bool _findingPanelOpened = false;
+
+        public void OpenFindingPanel()
+        {
+            if(!_findingPanelOpened)
+            {
+                _findingPanelOpened = true;
+                FindingPanel.Visibility = Visibility.Visible;
+                FindingBox.Text = "";
+                FoundCountText.Text = "Найдено соответветствий: 0";
+                FocusOnFindingPanel();
+            }
+        }
+
+        private void FocusOnFindingPanel()
+        {
+            Dispatcher.BeginInvoke(DispatcherPriority.Input,
+                new Action(delegate ()
+                {
+                    FindingBox.Focus();
+                }));
+        }
+
+        private void FindingTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (_findingPanelOpened)
+            {
+                FindMatches(FindingBox.Text);
+            }
+        }
+
+
+        public void FindMatches(string text)
+        {
+            int count = 0;
+            var list = App.list.GetActive().model.ListConnected;
+            foreach (var model in list.GetModels())
+            {
+                model.IsInFinding = false;
+                if (string.IsNullOrWhiteSpace(text))
+                    continue;
+
+                var split = SmartSplit(model.Name.ToLower());
+                foreach (var phrase in split)
+                {
+                    if (phrase.StartsWith(text.ToLower()))
+                    {
+                        model.IsInFinding = true;
+                        count += 1;
+                        break;
+                    }
+                }
+            }
+            FoundCountText.Text = $"Найдено соответствий: {count}";
+            AnimeList.ItemsSource = list.GetModels();
+            if (count == 1)
+            {
+                var found = AnimeList.ItemsSource.OfType<AnimeModel>().FirstOrDefault(x => x.IsInFinding == true);
+                if (found != null)
+                {
+                    AnimeList.ScrollIntoView(found);
+                }
+            }
+        }
+
+        private List<string> SmartSplit(string input)
+        {
+            string[] words = input.Split(' ');
+            List<string> substrings = new List<string>();
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                string substring = String.Join(" ", words, i, words.Length - i);
+                substrings.Add(substring);
+            }
+
+            return substrings;
+        }
+
+        public void HideFindingPanel()
+        {
+            if (_findingPanelOpened)
+            {
+                _findingPanelOpened = false;
+                FindingPanel.Visibility = Visibility.Hidden;
+                var list = App.list.GetActive().model.ListConnected;
+                foreach (var model in list.GetModels())
+                {
+                    model.IsInFinding = false;
                 }
             }
         }
@@ -774,7 +888,12 @@ namespace AnimeList.Windows
                 var window = new ChangeLanguageWindow();
                 window.ShowDialog();
             }
-            else if(tag == 3)
+            else if (tag == 3)
+            {
+                var window = new HistoryWindow();
+                window.Show();
+            }
+            else if(tag == 4)
             {
                 var window = new SettingsWindow();
                 window.Show();
@@ -784,6 +903,11 @@ namespace AnimeList.Windows
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void FindingCloseClicked(object sender, MouseButtonEventArgs e)
+        {
+            HideFindingPanel();
         }
     }
 

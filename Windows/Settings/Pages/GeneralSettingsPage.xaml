@@ -8,13 +8,13 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="GeneralSettingsPage">
 
-    <Grid>
+    <Grid x:Name="WholeGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="6*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel>
-            <TextBlock TextAlignment="Center" FontSize="20" Foreground="{DynamicResource ForegroundBrushColor}" Text="Общие настройки" Margin="5" Padding="10" />
+            <TextBlock Name="GeneralSettingsTitle" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource ForegroundBrushColor}" Text="Общие настройки" Margin="5" Padding="10" />
             <Border Background="{DynamicResource InputBoxBrushColor}" CornerRadius="10" Padding="10">
                 <ListBox Background="Transparent"  x:Name="TvBox" HorizontalAlignment="Stretch" BorderThickness="0" VerticalAlignment="Top">
                     <ListBox.ItemsPanel>
@@ -36,7 +36,7 @@
             </Border>
         </StackPanel>
         <Border Grid.Row="1"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Style="{DynamicResource MainBtns}"  Margin="0, 0, 10, 10">
-            <Button Content="Сохранить" Background="Transparent" FontSize="15" HorizontalContentAlignment="Center" BorderThickness="0" Click="SaveClicked"  Margin="10,5,10,5"></Button>
+            <Button Content="Сохранить" Name="EditingSaveChangesButton" Background="Transparent" FontSize="15" HorizontalContentAlignment="Center" BorderThickness="0" Click="SaveClicked"  Margin="10,5,10,5"></Button>
         </Border>
 
     </Grid>

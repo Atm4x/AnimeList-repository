@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 Z:\AnimeTopApp 1.4\AnimeList\App.xaml
-9-1408395933
+131925137456
 
-30-2008544264
+342037991655
 21-1041880550
-Controls\TabControl.xaml;Windows\AddTabChooseWindow.xaml;Windows\AddWindow.xaml;Windows\ChangeLanguageWindow.xaml;Windows\ControlWindow.xaml;Windows\MainWindow.xaml;Windows\Settings\Pages\GeneralSettingsPage.xaml;Windows\Settings\SettingsWindow.xaml;Windows\WarningWindow.xaml;
+Controls\ActionVisuals\AddActionVisual.xaml;Controls\ActionVisuals\EditActionVisual.xaml;Controls\ActionVisuals\RemoveActionVisual.xaml;Controls\TabControl.xaml;Windows\AddTabChooseWindow.xaml;Windows\AddWindow.xaml;Windows\ChangeLanguageWindow.xaml;Windows\ControlWindow.xaml;Windows\HistoryWindow.xaml;Windows\MainWindow.xaml;Windows\Settings\Pages\GeneralSettingsPage.xaml;Windows\Settings\SettingsWindow.xaml;Windows\WarningWindow.xaml;
 
 False
 

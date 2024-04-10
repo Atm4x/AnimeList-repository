@@ -273,6 +273,22 @@ namespace AnimeList.Models
         public event NameHandler NameChanged;
 
         [JsonIgnore]
+        public SolidColorBrush InFindingColor { get; set; } = Brushes.Transparent;
+
+        private bool _isInFinding = false;
+        [JsonIgnore]
+        public bool IsInFinding { get => _isInFinding; set
+            {
+                if (value)
+                    InFindingColor = GetFindingColor();
+                else InFindingColor = Brushes.Transparent;
+                _isInFinding = value;
+            } 
+        }
+
+        private SolidColorBrush GetFindingColor() => new SolidColorBrush((Color)App.Current.Resources["FindingColor"]);
+
+        [JsonIgnore]
         private string _Name;
 
 

@@ -1,5 +1,7 @@
 ﻿using AnimeList.Helpers;
 using AnimeList.Models;
+using AnimeList.Services;
+using LanguageClassTest.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,8 +35,28 @@ namespace AnimeList.Windows.Settings.Pages
             }
             this.TvBox.ItemsSource = ThemesToChoose;
             TvBox.SelectedItem = TvBox.ItemsSource.OfType<SchemeView>().FirstOrDefault(x => x.Id == App.CurrentThemeId);
+            UIChangeLanguage(App.CurrentLanguage);
         }
 
+        public void UIChangeLanguage(LanguageModel lang)
+        {
+            foreach (var translations in lang.Translate)
+            {
+                var buttonBlock = UIFinder.FindVisualChildren<System.Windows.Controls.Button>(WholeGrid).FirstOrDefault(x => x.Name == translations.Name);
+                if (buttonBlock != null)
+                {
+                    buttonBlock.Content = translations.Value;
+                    continue;
+                }
+
+                var textBlock = UIFinder.FindVisualChildren<TextBlock>(WholeGrid).FirstOrDefault(x => x.Name == translations.Name);
+                if (textBlock != null)
+                {
+                    textBlock.Text = translations.Value;
+                    continue;
+                }
+            }
+        }
         public class SchemeView
         {
             public int Id { get; set; }

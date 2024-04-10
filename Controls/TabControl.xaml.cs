@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using AnimeList.Models;
+using Newtonsoft.Json;
 using Path = System.Windows.Shapes.Path;
 
 namespace AnimeList.Controls
@@ -40,13 +41,16 @@ namespace AnimeList.Controls
             return Active;
         }
         private string ActiveColors(bool ActiveStatus) => ActiveStatus ? App.Current.Resources["TabActiveColor"].ToString() : App.Current.Resources["TabPassiveColor"].ToString();
-        
+
+        [JsonIgnore]
+        public string NameTab { get; set; }
 
         public TabControl(string Name, Models.AnimeList listConnected, bool isMain = false)
         {
             InitializeComponent();
             model = new TabModel() { ListConnected = listConnected };
             TabName.Text = Name;
+            NameTab = Name;
             Activation();
             IsMain = isMain;
             CtxMenu.DataContext = this;

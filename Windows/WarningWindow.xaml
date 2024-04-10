@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:AnimeList.Windows"
         mc:Ignorable="d"
-        Title="AL: Предупреждение" Height="300" Width="300" MinHeight="300" MinWidth="300" WindowStartupLocation="CenterScreen" Closed="WindowClosed">
+        Title="AniList: Предупреждение" Height="300" Width="300" MinHeight="300" MinWidth="300" WindowStartupLocation="CenterScreen" Closed="WindowClosed">
     <Grid Background="#2c2c2c">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -15,21 +15,23 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="3*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="60*"></ColumnDefinition>
+            <ColumnDefinition Width="47*"></ColumnDefinition>
+            <ColumnDefinition Width="133*"/>
+            <ColumnDefinition Width="60*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Border Grid.ColumnSpan="4" Background="#3c3c3c">
+        <Border Grid.ColumnSpan="4" Background="#3c3c3c" Margin="0,0,0,57" Grid.RowSpan="2">
             <TextBlock Text="Открытие файла списка" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
         </Border>
-        <Border Grid.Column="1" Grid.Row="2" Padding="2">
-        <Border  Padding="4" Background="#3c3c3c" CornerRadius="8" VerticalAlignment="Center">
-            <Button Background="Transparent" Click="OwnerMode">Импортировать</Button>
+        <Border Grid.Column="1" Grid.Row="2" Padding="2" Grid.ColumnSpan="2">
+            <Border  Padding="4" Background="#3c3c3c" CornerRadius="8" VerticalAlignment="Center">
+                <Button Background="Transparent" Click="OwnerMode">Импортировать</Button>
+            </Border>
         </Border>
+        <Border Grid.Column="1" Grid.Row="2" Padding="2" Grid.ColumnSpan="2" Margin="0,56,0,0" Grid.RowSpan="2">
+            <Border  Padding="4" Background="#3c3c3c" CornerRadius="8" VerticalAlignment="Center">
+                <Button Background="Transparent" Click="ViewMode">Просмотр</Button>
+            </Border>
         </Border>
-        <Border Grid.Column="1" Grid.Row="3" Padding="2">
-        <Border  Padding="4" Background="#3c3c3c" CornerRadius="8" VerticalAlignment="Center">
-            <Button Background="Transparent" Click="ViewMode">Просмотр</Button>
-        </Border></Border>
     </Grid>
 </Window>
