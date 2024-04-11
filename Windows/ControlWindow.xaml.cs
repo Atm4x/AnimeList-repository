@@ -769,7 +769,7 @@ namespace AnimeList.Windows
                 _findingPanelOpened = true;
                 FindingPanel.Visibility = Visibility.Visible;
                 FindingBox.Text = "";
-                FoundCountText.Text = "Найдено соответветствий: 0";
+                FoundCountText.Text = $"{App.CurrentLanguage.ControlWindowMessagesTranslate.FoundCountText}: 0";
                 FocusOnFindingPanel();
             }
         }
@@ -813,7 +813,7 @@ namespace AnimeList.Windows
                     }
                 }
             }
-            FoundCountText.Text = $"Найдено соответствий: {count}";
+            FoundCountText.Text = $"{App.CurrentLanguage.ControlWindowMessagesTranslate.FoundCountText}: {count}";
             AnimeList.ItemsSource = list.GetModels();
             if (count == 1)
             {

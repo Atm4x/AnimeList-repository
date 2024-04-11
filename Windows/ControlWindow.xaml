@@ -208,7 +208,7 @@
                     <Border Background="Transparent" MouseDown="FindingCloseClicked">
                         <TextBlock Text="×" FontSize="12" TextAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundBrush}"/>
                     </Border>
-                    <TextBlock Text="Поиск по названию:" Grid.Column="1" VerticalAlignment="Center" TextAlignment="Center" FontSize="12" Foreground="{DynamicResource ForegroundBrushColor}" />
+                    <TextBlock Name="FindingByNameText" Text="Поиск по названию:" Grid.Column="1" VerticalAlignment="Center" TextAlignment="Center" FontSize="12" Foreground="{DynamicResource ForegroundBrushColor}" />
                 </Grid>
                 <TextBox x:Name="FindingBox" BorderBrush="Transparent" Background="Transparent" Text="..." Padding="5"  HorizontalScrollBarVisibility="Hidden" Foreground="{DynamicResource ForegroundBrushColor}" TextChanged="FindingTextChanged" FontSize="17"/>
                 <TextBlock x:Name="FoundCountText" Text="Найдено соответветствий: 0" FontSize="12" Foreground="{DynamicResource ForegroundDisabledBrushColor}" />

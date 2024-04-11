@@ -73,6 +73,9 @@ namespace LanguageClassTest.Models
         [XmlElement("ThemesTitles")]
         public ThemesTitles ThemesTitlesTranslate { get; set; } = new ThemesTitles();
 
+        [XmlElement("ControlWindowMessages")]
+        public ControlWindowMessages ControlWindowMessagesTranslate { get; set; } = new ControlWindowMessages();
+
         [XmlArray()]
         public List<Field<string>> Translate { get; set; } =
         new List<Field<string>>
@@ -102,8 +105,14 @@ namespace LanguageClassTest.Models
             ("GeneralSettingsTitle", "Общие настройки"),
             ("HistoryChangesTitle", "История изменений за сессию"),
             ("TopTitle", "Топы"),
+            ("FindingByNameText", "Поиск по названию:"),
+            ("FoundCountText", "Найдено соответветствий: 0"),
         };
 
+        public class ControlWindowMessages
+        {
+            public string FoundCountText { get; set; } = "Найдено соответветствий";
+        }
         public class SettingsWindowMessages
         {
             public string General { get; set; } = "Общие";
