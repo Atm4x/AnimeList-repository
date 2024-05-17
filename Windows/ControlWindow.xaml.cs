@@ -151,7 +151,7 @@ namespace AnimeList.Windows
             LanguagesHelper.SaveDefaultLanguage();
             App.Languages = LanguagesHelper.GetAllLanguagesModel().ToList();
             var rus = App.Languages.FirstOrDefault(x => x.Code.Value.Equals("ru-RU"));
-            App.ChangeLanguage(rus ?? new LanguageClassTest.Models.LanguageModel());
+            App.ChangeLanguage(App.Languages.FirstOrDefault(lang => lang.Code.Value == configuration.LanguageCode) ?? rus);
             ColorSchemeModel.ChangeTheme(App.CurrentThemeId);
 
             ALCipher.Cipher cipher1 = null;
@@ -193,31 +193,31 @@ namespace AnimeList.Windows
             
 
             ALCipher.Cipher cipher2 = Helpers.ALCipher.ReadCipher();
-                var own = cipher2.EncryptionText;
-                var animelist = JsonSerializer.Deserialize<Models.AnimeList>(own,
-                    new JsonSerializerOptions()
-                    {
-                        PropertyNameCaseInsensitive = false,
-                        IncludeFields = true
-                    });
-                App.MainTab = new TabControl(cipher2.Name, animelist, true);
-                AnimeList.ItemsSource = animelist.GetModels();
-            
-
-                if (check != null && check.ToRewrite)
+            var own = cipher2.EncryptionText;
+            var animelist = JsonSerializer.Deserialize<Models.AnimeList>(own,
+                new JsonSerializerOptions()
                 {
-                    var options = new JsonSerializerOptions
-                    {
-                        Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
-                        WriteIndented = true
-                    };
+                    PropertyNameCaseInsensitive = false,
+                    IncludeFields = true
+                });
+            App.MainTab = new TabControl(cipher2.Name, animelist, true);
+            AnimeList.ItemsSource = animelist.GetModels();
 
-                    App.MainTab = new TabControl(cipher2.Name, list, true);
-                    ALCipher.WriteCipher(new ALCipher.Cipher()
-                        { Name = "Default", EncryptionText = JsonSerializer.Serialize(App.list.TabList[0].model.ListConnected, options) });
+
+            if (check != null && check.ToRewrite)
+            {
+                var options = new JsonSerializerOptions
+                {
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic),
+                    WriteIndented = true
+                };
+
+                App.MainTab = new TabControl(cipher2.Name, list, true);
+                ALCipher.WriteCipher(new ALCipher.Cipher()
+                { Name = "Default", EncryptionText = JsonSerializer.Serialize(App.list.TabList[0].model.ListConnected, options) });
 
                 AnimeList.ItemsSource = list.GetModels();
-                }
+            }
             
             AnimeList.SelectionChanged += AnimeListOnSelectionChanged;
             if (check != null && check is { ToRewrite: false })
@@ -908,6 +908,22 @@ namespace AnimeList.Windows
         private void FindingCloseClicked(object sender, MouseButtonEventArgs e)
         {
             HideFindingPanel();
+        }
+
+        private void MainWindowLoaded(object sender, RoutedEventArgs e)
+        {
+
+            //App.ChangeLanguage(App.CurrentLanguage);
+        }
+
+        private bool _extraContextMenuLoaded = false;
+        private void ExtraContextMenuLoaded(object sender, RoutedEventArgs e)
+        {
+            if (!_extraContextMenuLoaded)
+            {
+                App.ChangeLanguage(App.CurrentLanguage);
+                _extraContextMenuLoaded = true;
+            }
         }
     }
 

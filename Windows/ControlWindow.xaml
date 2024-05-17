@@ -5,7 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:AnimeList.Windows"
         mc:Ignorable="d"
-        Title="AniList: Аниме список" Height="670" Width="1000" MinHeight="670" MinWidth="1000" WindowStartupLocation="CenterScreen" Background="{DynamicResource MidBrsh}" Closing="OnClosing">
+        Title="AniList: Аниме список" Height="670" Loaded="MainWindowLoaded" Width="1000" MinHeight="670" MinWidth="1000" WindowStartupLocation="CenterScreen" Background="{DynamicResource MidBrsh}" Closing="OnClosing">
 
     <Grid KeyDown="WindowKeyDownPreview" x:Name="WholeControlPanel" Loaded="WindowLoaded">
         <Grid.ColumnDefinitions>
@@ -63,7 +63,7 @@
 
                 <Border Grid.Column="5" HorizontalAlignment="Stretch" Style="{DynamicResource MainBtns}" BorderThickness="0" x:Name="ExtraButton" MouseLeave="ExtraButtonMouseLeave">
                     <Border.ContextMenu>
-                        <ContextMenu BorderThickness="0" Foreground="Transparent" x:Name="ContextMenuOfExtraButton" Background="Transparent">
+                        <ContextMenu Loaded="ExtraContextMenuLoaded" BorderThickness="0" Foreground="Transparent" x:Name="ContextMenuOfExtraButton" Background="Transparent">
                             <ContextMenu.ItemContainerStyle>
                                 <Style TargetType="MenuItem">
                                     <Setter Property="Template">

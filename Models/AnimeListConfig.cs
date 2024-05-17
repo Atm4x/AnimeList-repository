@@ -16,11 +16,13 @@ namespace AnimeList.Models
         public List<Config> Configs;
 
         public int ThemeId { get; set; } = 1;
+        public string LanguageCode { get; set; } = "ru-RU";
         
         public AnimeListConfig()
         {
             Configs = new List<Config>();
             ThemeId = 1;
+            LanguageCode = "ru-RU";
         }
 
         public Config FindConfig(AnimeList list)

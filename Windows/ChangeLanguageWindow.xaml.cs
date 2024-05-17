@@ -1,4 +1,6 @@
-﻿using LanguageClassTest.Models;
+﻿using AnimeList.Helpers;
+using DiscordRPC;
+using LanguageClassTest.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +39,8 @@ namespace AnimeList.Windows
         {
             var item = (LanguageModel)LanguagesList.SelectedItem;
             App.ChangeLanguage(item);
+            App.Configuration.LanguageCode = item.Code.Value;
+            ConfigCipher.WriteConfigCipher();
             this.Close();
         }
     }
