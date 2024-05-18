@@ -260,11 +260,12 @@ namespace AnimeList.Models
             ColorSchemeModel.ThemeChanged += () => Status = _Status;
         }
 
-        public AnimeModel(int place, string name, AnimeModelStatus modelStatus = AnimeModelStatus.Finished)
+        public AnimeModel(int place, string name, AnimeModelStatus modelStatus = AnimeModelStatus.Finished, int rating = 0)
         {
             Place = place;
             _Name = name;
             Status = modelStatus;
+            Rating = rating;
             ColorSchemeModel.ThemeChanged += () => Status = _Status; 
         }
 
@@ -293,6 +294,7 @@ namespace AnimeList.Models
 
 
         public int Place { get; set; }
+
         public string Name
         {
             get => _Name;
@@ -311,6 +313,10 @@ namespace AnimeList.Models
                 _Status = value;
             } 
         }
+
+        public int Rating { get; set; } = 0;
+
+        public string Comment { get; set; } = "";
 
         private static SolidColorBrush GetForegroundColor()
         {

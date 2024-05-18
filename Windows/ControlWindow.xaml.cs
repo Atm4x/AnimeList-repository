@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Pipes;
@@ -340,9 +341,9 @@ namespace AnimeList.Windows
                 Remove.BorderBrush = Brushes.White;
                 Remove.IsEnabled = true;
 
-                if (Grid.GetColumnSpan(AnimeList) == 2)
+                if (Grid.GetColumnSpan(AnimeList) == 3)
                 {
-                    Grid.SetColumnSpan(AnimeList, 3);
+                    Grid.SetColumnSpan(AnimeList, 4);
                     Editing.Opacity = 0;
                     Editing.Visibility = Visibility.Hidden;
                 }
@@ -358,11 +359,14 @@ namespace AnimeList.Windows
                 Remove.BorderBrush = Brushes.White;
                 Remove.IsEnabled = true;
 
-                if (Grid.GetColumnSpan(AnimeList) == 2)
+                if (Grid.GetColumnSpan(AnimeList) == 3)
                 {
-                    ActualName.Text = ((AnimeModel) AnimeList.SelectedItem).Name;
-                    ActualPlace.Text = ((AnimeModel) AnimeList.SelectedItem).Place.ToString();
-                    ActualStatus.IsChecked = ((AnimeModel)AnimeList.SelectedItem).Status == AnimeModelStatus.Finished ? true : false;
+                    var item = ((AnimeModel)AnimeList.SelectedItem);
+                    ActualName.Text = item.Name;
+                    ActualPlace.Text = item.Place.ToString();
+                    ActualComment.Text = item.Comment;
+                    ActualStatus.IsChecked = item.Status == AnimeModelStatus.Finished ? true : false;
+                    RatingBox.Rating = item.Rating;
                 }
             }
             else
@@ -375,9 +379,9 @@ namespace AnimeList.Windows
                 Remove.BorderBrush = Brushes.Black;
                 Remove.IsEnabled = false;
 
-                if (Grid.GetColumnSpan(AnimeList) == 2)
+                if (Grid.GetColumnSpan(AnimeList) == 3)
                 {
-                    Grid.SetColumnSpan(AnimeList, 3);
+                    Grid.SetColumnSpan(AnimeList, 4);
                     Editing.Opacity = 0;
                     Editing.Visibility = Visibility.Hidden;
                 }
@@ -485,21 +489,25 @@ namespace AnimeList.Windows
 
         private void EditClick(object sender, RoutedEventArgs e)
         {
-            if (Grid.GetColumnSpan(AnimeList) == 2)
+            if (Grid.GetColumnSpan(AnimeList) == 3)
             {
-                Grid.SetColumnSpan(AnimeList, 3);
+                Grid.SetColumnSpan(AnimeList, 4);
                 Editing.Visibility = Visibility.Hidden;
+                GridSplitterBox.IsEnabled = false;
                 Editing.Opacity = 0;
             }
             else if (AnimeList.SelectedItems.Count == 1)
             {
-                Grid.SetColumnSpan(AnimeList, 2);
+                Grid.SetColumnSpan(AnimeList, 3);
                 Editing.Visibility = Visibility.Visible;
                 Editing.Opacity = 1;
+                GridSplitterBox.IsEnabled = true;
 
                 var selected = ((AnimeModel)AnimeList.SelectedItem);
                 ActualName.Text = selected.Name;
                 ActualPlace.Text = selected.Place.ToString();
+                RatingBox.Rating = selected.Rating;
+                ActualComment.Text = selected.Comment;
                 ActualStatus.IsChecked = selected.Status == AnimeModelStatus.Finished ? true : false;
             }
         }
@@ -518,6 +526,11 @@ namespace AnimeList.Windows
                 MessageBox.Show("Не введено название", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Hand);
                 return;
             }
+            if (ActualComment.Text.Length > 4096)
+            {
+                MessageBox.Show("Комментарий слишком длинный", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Hand);
+                return;
+            }
 
 
             var value = ActualStatus.IsChecked.Value;
@@ -527,11 +540,15 @@ namespace AnimeList.Windows
                 var oldPlace = Convert.ToInt32(current.Place.ToString());
                 var oldName = current.Name.ToString();
                 var oldStatus = Convert.ToInt32(current.Status);
+                var oldComment = current.Comment.ToString();
+                var oldRating = Convert.ToInt32(current.Rating.ToString());
                 if (current.Place == place)
                 {
                     var item = list.AL[
                         list.GetModels().FindIndex(x => x.Place == current.Place)];
                     item.Name = ActualName.Text;
+                    item.Rating = RatingBox.Rating;
+                    item.Comment = ActualComment.Text;
                     item.Status = ActualStatus.IsChecked.Value == false ? AnimeModelStatus.InProcess : AnimeModelStatus.Finished;
                     list.SaveChanges();
                 }
@@ -539,8 +556,11 @@ namespace AnimeList.Windows
                 {
                     list.RemoveModel(current.Place, true);
                     current = new AnimeModel(place, ActualName.Text, value == false ? AnimeModelStatus.InProcess : AnimeModelStatus.Finished);
-                    if (current.Place > list.GetModels().Count) current.Place = list.GetModels().Count + 1;
+                    if (current.Place > list.GetModels().Count) current.Place = list.GetModels().Count + 1; 
+                    current.Rating = RatingBox.Rating;
+                    current.Comment = ActualComment.Text;
                     list.AddModel(current, true);
+                    
                     list.SaveChanges();
                 }
 
@@ -554,16 +574,21 @@ namespace AnimeList.Windows
                     NameB = ActualName.Text,
                     PlaceA = oldPlace,
                     PlaceB = place,
+                    CommentA = oldComment,
+                    CommentB = ActualComment.Text,
                     WatchingA = oldStatus == 1 ? AnimeModelStatus.InProcess : AnimeModelStatus.Finished,
                     WatchingB = value == false ? AnimeModelStatus.InProcess : AnimeModelStatus.Finished,
+                    RatingA = oldRating,
+                    RatingB = RatingBox.Rating,
                     AModel = current,
                     AnimeList = list
-                }) ;
+                });
 
                 AnimeList.ItemsSource = list.GetModels();
                 AnimeList.ScrollIntoView(current);
                 AnimeList.SelectedItem = current;
-                Grid.SetColumnSpan(AnimeList, 3);
+                Grid.SetColumnSpan(AnimeList, 4);
+                GridSplitterBox.IsEnabled = false;
                 Editing.Opacity = 0;
                 Editing.Visibility = Visibility.Hidden;
 
@@ -924,6 +949,11 @@ namespace AnimeList.Windows
                 App.ChangeLanguage(App.CurrentLanguage);
                 _extraContextMenuLoaded = true;
             }
+        }
+
+        private void StarControl_RatingChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

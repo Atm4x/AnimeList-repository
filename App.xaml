@@ -2,8 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:AnimeList"
-             StartupUri="Windows/ControlWindow.xaml">
+             StartupUri="Windows/ControlWindow.xaml"
+             xmlns:converters="clr-namespace:AnimeList.Converters">
     <Application.Resources>
+        <converters:IntToVisibility x:Key="IntToVis" TrueValue="Hidden" FalseValue="Visible" Int="0"/>
         <Color x:Key="ForegroundColor">White</Color>
         <SolidColorBrush x:Key="ForegroundBrush" Color="{DynamicResource ForegroundColor}"/>
         <Color x:Key="ForegroundWatchingColor">Khaki</Color>

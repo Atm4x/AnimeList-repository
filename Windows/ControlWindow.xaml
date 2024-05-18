@@ -4,6 +4,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:AnimeList.Windows"
+        xmlns:converters="clr-namespace:AnimeList.Converters"
+        xmlns:controls="clr-namespace:AnimeList.Controls"
         mc:Ignorable="d"
         Title="AniList: Аниме список" Height="670" Loaded="MainWindowLoaded" Width="1000" MinHeight="670" MinWidth="1000" WindowStartupLocation="CenterScreen" Background="{DynamicResource MidBrsh}" Closing="OnClosing">
 
@@ -11,7 +13,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition Width="7"/>
+            <ColumnDefinition Width="1.5*" MinWidth="250"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -20,8 +23,9 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        
-        <Border Grid.Row="0" Grid.ColumnSpan="3" Background="{DynamicResource WindowBackgroundBrushColor}">
+
+        <GridSplitter Grid.Column="2" x:Name="GridSplitterBox" Panel.ZIndex="10" Background="Transparent" Grid.Row="2" HorizontalAlignment="Stretch"/>
+        <Border Grid.Row="0" Grid.ColumnSpan="4" Background="{DynamicResource WindowBackgroundBrushColor}">
             <ScrollViewer VerticalScrollBarVisibility="Disabled">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel x:Name="Tabs" Orientation="Horizontal"></StackPanel>
@@ -32,7 +36,7 @@
             </ScrollViewer>
         </Border>
         
-        <Border Grid.Row="1" Background="#3b3b3b" Grid.ColumnSpan="3">
+        <Border Grid.Row="1" Background="#3b3b3b" Grid.ColumnSpan="4">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
@@ -93,112 +97,138 @@
 
 
         <ListView x:Name="AnimeList"  ItemContainerStyle="{DynamicResource MyStyle}" ScrollViewer.PanningRatio="0.5"  ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                  Grid.ColumnSpan="3" Grid.Row="2" Background="{DynamicResource ListBackgroundBrushColor}" Margin="5 0 5 0" Padding="5" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#00000000" >
+                  Grid.ColumnSpan="4" Grid.Row="2" Background="{DynamicResource ListBackgroundBrushColor}" Margin="5 0 5 0" Padding="5" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="#00000000" >
             
             <ListView.ItemTemplate>
                 <DataTemplate >
-                    <StackPanel HorizontalAlignment="Stretch">
-                        <TextBlock FontSize="2.5"></TextBlock>
-                        <StackPanel Orientation="Horizontal" >
-                        
-                            <Border Background="{DynamicResource BackgroundModelBrushColor}" CornerRadius="3" Padding="3" x:Name="PlaceBorder">
-                                <TextBlock Text="{Binding Place, StringFormat='{}{0}.'}"  Foreground="{DynamicResource ForegroundBrushColor}" Background="Transparent"/>
-                            </Border>
-                            <TextBlock FontSize="2" Text="fFF" Opacity="0"></TextBlock>
-                            <Image Source="/Images/rsz_watching.png" Visibility="{Binding Watching}" Stretch="Fill" MaxHeight="{Binding ElementName=PlaceBorder, Path=ActualHeight}"/>
-                            <TextBlock FontSize="2" Text="fFF" Opacity="0"></TextBlock>
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0 4 0 4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
 
-                            <TextBox IsReadOnly="True" Text="{Binding Name}" HorizontalAlignment="Stretch" BorderThickness="0" Background="{Binding InFindingColor}" Foreground="{Binding Path=Brush}" TextWrapping="Wrap"/>
-                            
-                        </StackPanel>
-                        <TextBlock FontSize="2.5"></TextBlock>
-                    </StackPanel>
+                        <Border Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Left" Background="{DynamicResource BackgroundModelBrushColor}" CornerRadius="3" Padding="3" x:Name="PlaceBorder">
+                            <TextBlock Text="{Binding Place, StringFormat='{}{0}.'}"  Foreground="{DynamicResource ForegroundBrushColor}" Background="Transparent"/>
+                        </Border>
+
+                        <Image Margin="2 0 2 0" Source="/Images/rsz_watching.png"  VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding Watching}" Stretch="Fill" MaxHeight="{Binding ElementName=PlaceBorder, Path=ActualHeight}" Grid.Column="1"/>
+
+                        <TextBox  VerticalAlignment="Center" IsReadOnly="True" Text="{Binding Name}" HorizontalAlignment="Left" BorderThickness="0" Background="{Binding InFindingColor}" Foreground="{Binding Path=Brush}" TextWrapping="Wrap" Grid.Column="2"/>
+
+                        <Border Grid.Column="3"  VerticalAlignment="Center" Visibility="{Binding Path=Rating, Converter={StaticResource IntToVis} }" HorizontalAlignment="Left" Background="{DynamicResource BackgroundModelBrushColor}" CornerRadius="3" Padding="3">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center"> 
+                                <TextBlock Text="{Binding Rating}" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundBrushColor}" Background="Transparent" Margin="2 0 2 0"/>
+                                <Path VerticalAlignment="Center" HorizontalAlignment="Center" Data="M 10,1 L 12,7 L 18,7 L 13,11 L 15,17 L 10,13 L 5,17 L 7,11 L 2,7 L 8,7 Z" Width="20" Height="20"  Stroke="Orange" Fill="Orange"/>
+                            </StackPanel>
+                        </Border>
+
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <Border x:Name="Editing" Grid.Row="2" Grid.Column="2" Background="{DynamicResource BackgroundEditBrushColor}" Opacity="0" Visibility="Hidden">
+
+        <Border x:Name="Editing" Grid.Row="2" Grid.Column="3" Background="{DynamicResource BackgroundEditBrushColor}" Opacity="0" Visibility="Hidden">
+
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="8*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <StackPanel>
-                    <Border Background="{DynamicResource BackgroundEditingBrushColor}" CornerRadius="0, 0, 4, 4" Padding="4">
-                        <TextBox IsReadOnly="True" Foreground="{DynamicResource ForegroundBrushColor}" Background="Transparent" HorizontalAlignment="Center" BorderThickness="0" Text="{Binding ElementName=ActualName, Path=Text}" FontSize="24" VerticalAlignment="Center"></TextBox>
-                    </Border>
-                    
-                    <TextBlock Text="gap" Opacity="0"></TextBlock>
-                    <TextBlock Name="EditingNameBlock" Text="Название:" Foreground="{DynamicResource ForegroundBrushColor}" TextAlignment="Center" FontSize="20"></TextBlock>
-                    <TextBlock Text="gap" Opacity="0" FontSize="12"></TextBlock>
-                    <Border Background="{DynamicResource InputBoxBrushColor}" CornerRadius="4" Padding="4">
-                        <TextBox CaretBrush="{DynamicResource ForegroundBrushColor}" x:Name="ActualName" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundBrushColor}" FontSize="18" VerticalAlignment="Center" Background="Transparent" BorderThickness="0"></TextBox>
-                    </Border>
-                    <TextBlock Text="gap" Opacity="0"></TextBlock>
-                    <TextBlock Name="EditingPlaceBlock"  Text="Место:" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource ForegroundBrushColor}"></TextBlock>
-                    <TextBlock Text="gap" Opacity="0" FontSize="12" ></TextBlock>
-                    <Border Background="{DynamicResource InputBoxBrushColor}" CornerRadius="4" Padding="4">
-                        <TextBox CaretBrush="{DynamicResource ForegroundBrushColor}" x:Name="ActualPlace" Foreground="{DynamicResource ForegroundBrushColor}" HorizontalAlignment="Center" FontSize="18" VerticalAlignment="Center" Background="Transparent" BorderThickness="0"></TextBox>
-                    </Border>
-                    <TextBlock Text="gap" Opacity="0"></TextBlock>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock Name="EditingWatchedBlock"  Foreground="{DynamicResource ForegroundBrushColor}" Text="Просмотрено: " TextAlignment="Center" FontSize="20"></TextBlock>
-                        <Border Background="{DynamicResource InputBoxBrushColor}" CornerRadius="5" Width="25" Height="25" BorderThickness="1" Name="ParentCheckBox">
-                            <CheckBox x:Name="ActualStatus" HorizontalAlignment="Center" Padding="8" Foreground="White" MouseEnter="CheckBoxMouseEnter" MouseLeave="CheckBoxMouseLeave" FontSize="18" VerticalAlignment="Center" Background="Transparent" BorderThickness="0">
-                                <CheckBox.Style>
-                                    <Style TargetType="CheckBox">
-                                        <Setter Property="Foreground" Value="{DynamicResource ForegroundBrushColor}"/>
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="BorderBrush" Value="{DynamicResource ForegroundBrushColor}"/>
-                                        <Setter Property="BorderThickness" Value="1"/>
-                                        <Setter Property="HorizontalAlignment" Value="Left"/>
-                                        <Setter Property="VerticalAlignment" Value="Center"/>
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="{x:Type CheckBox}">
-                                                    <BulletDecorator Background="Transparent">
-                                                        <BulletDecorator.Bullet>
-                                                            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                                                <Path x:Name="CheckMark" Stroke="{DynamicResource ForegroundBrushColor}" StrokeThickness="2" Data="M 0 4 L 4 8 L 8 0"/>
-                                                            </Grid>
-                                                        </BulletDecorator.Bullet>
-                                                        <ContentPresenter Margin="0,0,0,0" 
+                <ScrollViewer VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel>
+                        <Border Background="{DynamicResource BackgroundEditingBrushColor}" CornerRadius="0, 0, 4, 4" Padding="4">
+                            <TextBox IsReadOnly="True" Foreground="{DynamicResource ForegroundBrushColor}" Background="Transparent" HorizontalAlignment="Center" BorderThickness="0" Text="{Binding ElementName=ActualName, Path=Text}" FontSize="24" VerticalAlignment="Center"></TextBox>
+                        </Border>
+
+                        <TextBlock Text="gap" Opacity="0"></TextBlock>
+                        <TextBlock Name="EditingNameBlock" Text="Название:" Foreground="{DynamicResource ForegroundBrushColor}" TextAlignment="Center" FontSize="20"></TextBlock>
+                        <TextBlock Text="gap" Opacity="0" FontSize="12"></TextBlock>
+                        <Border Background="{DynamicResource InputBoxBrushColor}" CornerRadius="4" Padding="4">
+                            <TextBox CaretBrush="{DynamicResource ForegroundBrushColor}" x:Name="ActualName" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundBrushColor}" FontSize="18" VerticalAlignment="Center" Background="Transparent" BorderThickness="0"></TextBox>
+                        </Border>
+                        <TextBlock Text="gap" Opacity="0"></TextBlock>
+                        <TextBlock Name="EditingPlaceBlock"  Text="Место:" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource ForegroundBrushColor}"></TextBlock>
+                        <TextBlock Text="gap" Opacity="0" FontSize="12" ></TextBlock>
+                        <Border Background="{DynamicResource InputBoxBrushColor}" CornerRadius="4" Padding="4">
+                            <TextBox CaretBrush="{DynamicResource ForegroundBrushColor}" x:Name="ActualPlace" Foreground="{DynamicResource ForegroundBrushColor}" HorizontalAlignment="Center" FontSize="18" VerticalAlignment="Center" Background="Transparent" BorderThickness="0"></TextBox>
+                        </Border>
+                        <TextBlock Text="gap" Opacity="0"></TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Name="EditingWatchedBlock"  Foreground="{DynamicResource ForegroundBrushColor}" Text="Просмотрено: " TextAlignment="Center" FontSize="20"></TextBlock>
+                            <Border Background="{DynamicResource InputBoxBrushColor}" CornerRadius="5" Width="25" Height="25" BorderThickness="1" Name="ParentCheckBox">
+                                <CheckBox x:Name="ActualStatus" HorizontalAlignment="Center" Padding="8" Foreground="White" MouseEnter="CheckBoxMouseEnter" MouseLeave="CheckBoxMouseLeave" FontSize="18" VerticalAlignment="Center" Background="Transparent" BorderThickness="0">
+                                    <CheckBox.Style>
+                                        <Style TargetType="CheckBox">
+                                            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrushColor}"/>
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="BorderBrush" Value="{DynamicResource ForegroundBrushColor}"/>
+                                            <Setter Property="BorderThickness" Value="1"/>
+                                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                                                        <BulletDecorator Background="Transparent">
+                                                            <BulletDecorator.Bullet>
+                                                                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                                                    <Path x:Name="CheckMark" Stroke="{DynamicResource ForegroundBrushColor}" StrokeThickness="2" Data="M 0 4 L 4 8 L 8 0"/>
+                                                                </Grid>
+                                                            </BulletDecorator.Bullet>
+                                                            <ContentPresenter Margin="0,0,0,0" 
                                   VerticalAlignment="Center" 
                                   HorizontalAlignment="Center" 
                                   RecognizesAccessKey="True"/>
-                                                    </BulletDecorator>
-                                                    <ControlTemplate.Triggers>
-                                                        <Trigger Property="IsChecked" Value="True">
-                                                            <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
-                                                        </Trigger>
-                                                        <Trigger Property="IsChecked" Value="False">
-                                                            <Setter TargetName="CheckMark" Property="Visibility" Value="Hidden"/>
-                                                        </Trigger>
-                                                        <Trigger Property="IsEnabled" Value="False">
-                                                            <Setter TargetName="CheckMark" Property="Stroke" Value="#AFAFAF"/>
-                                                        </Trigger>
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </CheckBox.Style>
-                            </CheckBox>
+                                                        </BulletDecorator>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsChecked" Value="True">
+                                                                <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
+                                                            </Trigger>
+                                                            <Trigger Property="IsChecked" Value="False">
+                                                                <Setter TargetName="CheckMark" Property="Visibility" Value="Hidden"/>
+                                                            </Trigger>
+                                                            <Trigger Property="IsEnabled" Value="False">
+                                                                <Setter TargetName="CheckMark" Property="Stroke" Value="#AFAFAF"/>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </CheckBox.Style>
+                                </CheckBox>
+                            </Border>
+                        </StackPanel>
+                        <TextBlock Text="gap" Opacity="0"></TextBlock>
+                        <controls:StarControl MaxRating="10" x:Name="RatingBox"/>
+                        <TextBlock Text="gap" Opacity="0" FontSize="5"></TextBlock>
+                        <TextBlock x:Name="RatingText" Visibility="{Binding ElementName=RatingBox, Path=Rating, Converter={StaticResource IntToVis} }" TextAlignment="Center" FontSize="15" Text="{Binding ElementName=RatingBox, Path=Rating, StringFormat={}{0}/10★}" Foreground="{DynamicResource ForegroundBrushColor}">
+
+                        </TextBlock>
+                        <TextBlock Text="gap" Opacity="0" FontSize="12"></TextBlock>
+                        <TextBlock Name="CommentEditBlock"  Text="Комментарий:" TextAlignment="Center" FontSize="20" Foreground="{DynamicResource ForegroundBrushColor}"></TextBlock>
+
+                        <TextBlock Text="gap" Opacity="0" FontSize="12"></TextBlock>
+                        <Border MinHeight="100" Background="{DynamicResource InputBoxBrushColor}" CornerRadius="4" Padding="4">
+                            <TextBox Margin="5" FontSize="15" VerticalAlignment="Stretch" VerticalContentAlignment="Top" TextWrapping="Wrap" MaxLines="99" CaretBrush="{DynamicResource ForegroundBrushColor}" x:Name="ActualComment" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Foreground="{DynamicResource ForegroundBrushColor}" Background="Transparent" BorderThickness="0"></TextBox>
                         </Border>
+                        <TextBlock Text="gap" Opacity="0" FontSize="12"></TextBlock>
                     </StackPanel>
-                </StackPanel>
+                </ScrollViewer>
                 <Border Grid.Row="1" Background="{DynamicResource ButtonDisabledBackgroundBrushColor}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,15,0" CornerRadius="0, 0, 4, 4" Padding="4">
                     <Button Name="EditingSaveChangesButton" Background="Transparent" Content="Сохранить" Click="SaveClick"></Button>
                 </Border>
             </Grid>
         </Border>
 
-        <Border  BorderBrush="Black" BorderThickness="0, 0.8, 0, 0" Grid.ColumnSpan="3" Grid.Row="2"/>
-        <Border Grid.Row="3" Background="{DynamicResource VersionMenuBrushColor}" Grid.ColumnSpan="3" Cursor="Hand" MouseDown="VersionMouseDown">
+        <Border  BorderBrush="Black" BorderThickness="0, 0.8, 0, 0" Grid.ColumnSpan="4" Grid.Row="2"/>
+        <Border Grid.Row="3" Background="{DynamicResource VersionMenuBrushColor}" Grid.ColumnSpan="4" Cursor="Hand" MouseDown="VersionMouseDown">
             <TextBlock Margin="10, 0" x:Name="VersionControl" Text="Version" FontSize="14" Foreground="#919191"/>
         </Border>
 
-        <Border x:Name="FindingPanel" Visibility="Hidden" CornerRadius="5" BorderThickness="0.5" Padding="3" BorderBrush="{DynamicResource ForegroundBrushColor}" Grid.Row="2" Grid.Column="2" VerticalAlignment="Top" MaxWidth="210" HorizontalAlignment="Right" Background="{DynamicResource BackgroundEditingBrushColor}" Margin="0, 10, 10, 0">
+        <Border x:Name="FindingPanel" Visibility="Hidden" CornerRadius="5" BorderThickness="0.5" Padding="3" BorderBrush="{DynamicResource ForegroundBrushColor}" Grid.Row="2" Grid.Column="3" VerticalAlignment="Top" MaxWidth="210" HorizontalAlignment="Right" Background="{DynamicResource BackgroundEditingBrushColor}" Margin="0, 10, 10, 0">
             <StackPanel>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -215,11 +245,11 @@
             </StackPanel>
         </Border>
 
-        <Border Grid.RowSpan="3" Visibility="Hidden" Grid.ColumnSpan="3" x:Name="CopiedMark" Background="{DynamicResource BackgroundModelBrushColor}" CornerRadius="5" Opacity="0" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Border Grid.RowSpan="3" Visibility="Hidden" Grid.ColumnSpan="4" x:Name="CopiedMark" Background="{DynamicResource BackgroundModelBrushColor}" CornerRadius="5" Opacity="0" VerticalAlignment="Top" HorizontalAlignment="Left">
             <TextBlock Name="CopiedPopupMessage" Text="Скопировано" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
 
-        <Border x:Name="Synchronize" MaxWidth="500" Grid.ColumnSpan="3" BorderBrush="Black" BorderThickness="1" Grid.RowSpan="4" Margin="30, -2000, 30, 30" Background="{DynamicResource BackgroundLightBrushColor}" CornerRadius="15" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="600" Padding="10">
+        <Border x:Name="Synchronize" MaxWidth="500" Grid.ColumnSpan="4" BorderBrush="Black" BorderThickness="1" Grid.RowSpan="4" Margin="30, -2000, 30, 30" Background="{DynamicResource BackgroundLightBrushColor}" CornerRadius="15" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="600" Padding="10">
             <StackPanel>
                 <Grid>
                     <Border Style="{DynamicResource MainBtns}" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Padding="10 5 10 5" MouseDown="BackButtonOnWiFiPanelClicked" CornerRadius="20">
@@ -247,7 +277,7 @@
         </Border>
 
         
-        <Border x:Name="NewContentPanel" Visibility="Hidden" Opacity="1" Grid.RowSpan="4" Grid.ColumnSpan="3" Background="#bb000000">
+        <Border x:Name="NewContentPanel" Visibility="Hidden" Opacity="1" Grid.RowSpan="4" Grid.ColumnSpan="4" Background="#bb000000">
             <Border Margin="180 80"  Background="{DynamicResource WindowBackgroundBrushColor}" CornerRadius="10" BorderThickness="15" BorderBrush="{DynamicResource VersionMenuBrushColor}" Padding="20">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -268,6 +298,7 @@
         </Border>
     </Grid>
     <Window.Resources>
+
 
         <SolidColorBrush x:Key="ModelForeground" Color="{DynamicResource ExtraForeground}"/>
         <SolidColorBrush x:Key="WindowBackgroundBrushColor" Color="{DynamicResource BackgroundDarkerColor}"/>

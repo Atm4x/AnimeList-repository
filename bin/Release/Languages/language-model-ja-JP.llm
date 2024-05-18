@@ -25,6 +25,33 @@
         <WarningMessage>注目してほしい！</WarningMessage>
         <ExistsMessage>このリストはすでにAniListに登録されています。</ExistsMessage>
     </AddTabWindowDialogTranslate>
+
+    <SettingsWindowName>
+        <Value>AniList: 設定</Value>
+    </SettingsWindowName>
+    <SettingsWindowMessages>
+        <General>一般</General>
+    </SettingsWindowMessages>
+    <HistoryWindowTitle>
+        <Value>AniList: 変更の歴史</Value>
+    </HistoryWindowTitle>
+    <HistoryWindowActions>
+        <AddMessage>アニメの追加</AddMessage>
+        <RemoveMessage>アニメの削除</RemoveMessage>
+        <EditMessage>アニメを変える</EditMessage>
+        <WiFiMessage>Wi-Fi経由の同期</WiFiMessage>
+    </HistoryWindowActions>
+    <ThemesTitles>
+        <DarkTheme>暗い話題</DarkTheme>
+        <LightTheme>ライトテーマ</LightTheme>
+        <USSRTheme>ソ連のテーマ</USSRTheme>
+        <WaterfallTheme>滝のテーマ</WaterfallTheme>
+        <LoveTheme>愛のテーマ</LoveTheme>
+        <JungleTheme>ジャングルのテーマ</JungleTheme>
+    </ThemesTitles>
+    <ControlWindowMessages>
+        <FoundCountText>マッチ発見</FoundCountText>
+    </ControlWindowMessages>
     <Translate>
         <FieldOfString Name="AddModelButton">
             <Value>追加</Value>
@@ -86,5 +113,28 @@
         <FieldOfString Name="OpenListButton">
             <Value>既存</Value>
         </FieldOfString>
+
+	<FieldOfString Name="SettingContextItem">
+            <Value>設定</Value>
+        </FieldOfString>
+        <FieldOfString Name="HistoryOfChanges">
+            <Value>変更の歴史</Value>
+        </FieldOfString>
+        <FieldOfString Name="GeneralSettingsTitle">
+            <Value>一般設定</Value>
+        </FieldOfString>
+        <FieldOfString Name="HistoryChangesTitle">
+            <Value>セッションごとの変更履歴</Value>
+        </FieldOfString>
+        <FieldOfString Name="TopTitle">
+            <Value>リスト</Value>
+        </FieldOfString>        
+	<FieldOfString Name="FindingByNameText">
+            <Value>名前で検索:</Value>
+        </FieldOfString>
+        <FieldOfString Name="FoundCountText">
+            <Value>マッチ発見: 0</Value>
+        </FieldOfString>
+
     </Translate>
 </LanguageModel>

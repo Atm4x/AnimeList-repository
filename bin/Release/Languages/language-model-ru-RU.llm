@@ -25,6 +25,32 @@
         <WarningMessage>Внимание!</WarningMessage>
         <ExistsMessage>Этот список уже находится в AniList</ExistsMessage>
     </AddTabWindowDialogTranslate>
+    <SettingsWindowName>
+        <Value>AniList: Настройки</Value>
+    </SettingsWindowName>
+    <SettingsWindowMessages>
+        <General>Общие</General>
+    </SettingsWindowMessages>
+    <HistoryWindowTitle>
+        <Value>AniList: История изменений</Value>
+    </HistoryWindowTitle>
+    <HistoryWindowActions>
+        <AddMessage>Добавление аниме</AddMessage>
+        <RemoveMessage>Удаление аниме</RemoveMessage>
+        <EditMessage>Изменение аниме</EditMessage>
+        <WiFiMessage>Синхронизация по Wi-Fi</WiFiMessage>
+    </HistoryWindowActions>
+    <ThemesTitles>
+        <DarkTheme>Тёмная тема</DarkTheme>
+        <LightTheme>Светлая тема</LightTheme>
+        <USSRTheme>Тема СССР</USSRTheme>
+        <WaterfallTheme>Тема водопада</WaterfallTheme>
+        <LoveTheme>Любовная тема</LoveTheme>
+        <JungleTheme>Тема джунглей</JungleTheme>
+    </ThemesTitles>
+    <ControlWindowMessages>
+        <FoundCountText>Найдено соответветствий</FoundCountText>
+    </ControlWindowMessages>
     <Translate>
         <FieldOfString Name="AddModelButton">
             <Value>Добавить</Value>
@@ -85,6 +111,27 @@
         </FieldOfString>
         <FieldOfString Name="OpenListButton">
             <Value>Открыть существующий</Value>
+        </FieldOfString>
+        <FieldOfString Name="SettingContextItem">
+            <Value>Настройки</Value>
+        </FieldOfString>
+        <FieldOfString Name="HistoryOfChanges">
+            <Value>История изменений</Value>
+        </FieldOfString>
+        <FieldOfString Name="GeneralSettingsTitle">
+            <Value>Общие настройки</Value>
+        </FieldOfString>
+        <FieldOfString Name="HistoryChangesTitle">
+            <Value>История изменений за сессию</Value>
+        </FieldOfString>
+        <FieldOfString Name="TopTitle">
+            <Value>Топы</Value>
+        </FieldOfString>
+        <FieldOfString Name="FindingByNameText">
+            <Value>Поиск по названию:</Value>
+        </FieldOfString>
+        <FieldOfString Name="FoundCountText">
+            <Value>Найдено соответветствий: 0</Value>
         </FieldOfString>
     </Translate>
 </LanguageModel>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Timers;
 using System.Windows;
 using AnimeList.Controls;
@@ -46,7 +47,7 @@ namespace AnimeList
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            ExectutionPath = Environment.CurrentDirectory;
+            ExectutionPath = Directory.GetParent(Assembly.GetEntryAssembly().Location).FullName;
             historyList = new HistoryList();
 
             CheckUpdates();

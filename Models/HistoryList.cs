@@ -123,6 +123,10 @@ namespace AnimeList.Models
         public int PlaceB { get; set; }
         public string NameA { get; set; }
         public string NameB { get; set; }
+        public string CommentA { get; set; }
+        public string CommentB { get; set; }
+        public int RatingA { get; set; }
+        public int RatingB { get; set; }
         public AnimeModelStatus WatchingA { get; set; }
         public AnimeModelStatus WatchingB { get; set; }
 
@@ -136,6 +140,8 @@ namespace AnimeList.Models
             AModel.Place = PlaceB;
             AModel.Name = NameB;
             AModel.Status = WatchingB;
+            AModel.Rating = RatingB;
+            AModel.Comment = CommentB;
             AnimeList.AddModel(AModel, true);
         }
 
@@ -145,6 +151,8 @@ namespace AnimeList.Models
             AModel.Place = PlaceA;
             AModel.Name = NameA;
             AModel.Status = WatchingA;
+            AModel.Rating = RatingA;
+            AModel.Comment = CommentA;
             AnimeList.AddModel(AModel, true);
         }
     }

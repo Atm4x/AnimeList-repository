@@ -112,3 +112,5 @@ Z:\AnimeTopApp 1.4\AnimeList\obj\Debug\Controls\ActionVisuals\AddActionVisual.ba
 Z:\AnimeTopApp 1.4\AnimeList\obj\Debug\Controls\ActionVisuals\EditActionVisual.baml
 Z:\AnimeTopApp 1.4\AnimeList\obj\Debug\Controls\ActionVisuals\RemoveActionVisual.baml
 Z:\AnimeTopApp 1.4\AnimeList\obj\Debug\Windows\HistoryWindow.baml
+Z:\AnimeTopApp 1.4\AnimeList\obj\Debug\Controls\StarControl.g.cs
+Z:\AnimeTopApp 1.4\AnimeList\obj\Debug\Controls\StarControl.baml

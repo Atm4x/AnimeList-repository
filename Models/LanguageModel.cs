@@ -108,6 +108,7 @@ namespace LanguageClassTest.Models
             ("TopTitle", "Топы"),
             ("FindingByNameText", "Поиск по названию:"),
             ("FoundCountText", "Найдено соответветствий: 0"),
+            ("CommentEditBlock", "Комментарий:")
         };
 
         public class ControlWindowMessages

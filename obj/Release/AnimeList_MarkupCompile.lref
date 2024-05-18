@@ -1,10 +1,15 @@
 ﻿Z:\AnimeTopApp 1.4\AnimeList\obj\Release\GeneratedInternalTypeHelper.g.cs
 FZ:\AnimeTopApp 1.4\AnimeList\App.xaml;;
+FZ:\AnimeTopApp 1.4\AnimeList\Controls\ActionVisuals\AddActionVisual.xaml;;
+FZ:\AnimeTopApp 1.4\AnimeList\Controls\ActionVisuals\EditActionVisual.xaml;;
+FZ:\AnimeTopApp 1.4\AnimeList\Controls\ActionVisuals\RemoveActionVisual.xaml;;
+FZ:\AnimeTopApp 1.4\AnimeList\Controls\StarControl.xaml;;
 FZ:\AnimeTopApp 1.4\AnimeList\Controls\TabControl.xaml;;
 FZ:\AnimeTopApp 1.4\AnimeList\Windows\AddTabChooseWindow.xaml;;
 FZ:\AnimeTopApp 1.4\AnimeList\Windows\AddWindow.xaml;;
 FZ:\AnimeTopApp 1.4\AnimeList\Windows\ChangeLanguageWindow.xaml;;
 FZ:\AnimeTopApp 1.4\AnimeList\Windows\ControlWindow.xaml;;
+FZ:\AnimeTopApp 1.4\AnimeList\Windows\HistoryWindow.xaml;;
 FZ:\AnimeTopApp 1.4\AnimeList\Windows\MainWindow.xaml;;
 FZ:\AnimeTopApp 1.4\AnimeList\Windows\Settings\Pages\GeneralSettingsPage.xaml;;
 FZ:\AnimeTopApp 1.4\AnimeList\Windows\Settings\SettingsWindow.xaml;;
