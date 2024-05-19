@@ -34,6 +34,7 @@ namespace AnimeList.Windows.Settings.Pages
                 ThemesToChoose.Add(new SchemeView(theme.ID, theme.Title, theme.SchemeBackground));
             }
             this.TvBox.ItemsSource = ThemesToChoose;
+            CurrentFontSelectionBox.ItemsSource = Fonts.SystemFontFamilies.OrderBy(x => x.Source).ToList();
             TvBox.SelectedItem = TvBox.ItemsSource.OfType<SchemeView>().FirstOrDefault(x => x.Id == App.CurrentThemeId);
             UIChangeLanguage(App.CurrentLanguage);
         }
@@ -88,6 +89,12 @@ namespace AnimeList.Windows.Settings.Pages
         {
             App.controlWindow.AnimeList.ItemsSource = App.list.GetActive().model.ListConnected.GetModels();
             ColorSchemeModel.ThemeChanged -= ThemeChangeFinished;
+        }
+
+        private void FontChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selected = CurrentFontSelectionBox.SelectedItem as FontFamily;
+            this.Resources["DynamicFontFamily"] = new FontFamily(selected.Source);
         }
     }
 }

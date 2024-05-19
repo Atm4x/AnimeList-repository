@@ -13,6 +13,7 @@ using System.Text.Unicode;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -493,7 +494,7 @@ namespace AnimeList.Windows
             {
                 Grid.SetColumnSpan(AnimeList, 4);
                 Editing.Visibility = Visibility.Hidden;
-                GridSplitterBox.IsEnabled = false;
+                GridSplitterBox.Visibility = Visibility.Hidden;
                 Editing.Opacity = 0;
             }
             else if (AnimeList.SelectedItems.Count == 1)
@@ -501,7 +502,7 @@ namespace AnimeList.Windows
                 Grid.SetColumnSpan(AnimeList, 3);
                 Editing.Visibility = Visibility.Visible;
                 Editing.Opacity = 1;
-                GridSplitterBox.IsEnabled = true;
+                GridSplitterBox.Visibility = Visibility.Visible;
 
                 var selected = ((AnimeModel)AnimeList.SelectedItem);
                 ActualName.Text = selected.Name;
@@ -588,7 +589,7 @@ namespace AnimeList.Windows
                 AnimeList.ScrollIntoView(current);
                 AnimeList.SelectedItem = current;
                 Grid.SetColumnSpan(AnimeList, 4);
-                GridSplitterBox.IsEnabled = false;
+                GridSplitterBox.Visibility = Visibility.Hidden;
                 Editing.Opacity = 0;
                 Editing.Visibility = Visibility.Hidden;
 
@@ -952,6 +953,16 @@ namespace AnimeList.Windows
         }
 
         private void StarControl_RatingChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AnimeList_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            
+        }
+
+        private static void AnimateScroll(ScrollViewer scrollViewer, double ToValue)
         {
 
         }

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Timers;
 using System.Windows;
+using System.Windows.Controls.Primitives;
+using System.Windows.Media;
 using AnimeList.Controls;
 using AnimeList.Helpers;
 using AnimeList.Models;
@@ -43,6 +45,10 @@ namespace AnimeList
             CurrentLanguage = model;
             LanguageUpdated?.Invoke(CurrentLanguage);
             ColorSchemeModel.SetupColors();
+        }
+        public static void ChangeFont(FontFamily font)
+        {
+            Console.WriteLine(font.Source);
         }
 
         protected override void OnStartup(StartupEventArgs e)

@@ -119,6 +119,7 @@
     </Compile>
     <Compile Include="Converters\BoolToValueConverter.cs" />
     <Compile Include="Converters\IntToValueConverter.cs" />
+    <Compile Include="Converters\StringEmptyToValueConverter.cs" />
     <Compile Include="Helpers\ALCipher.cs" />
     <Compile Include="Helpers\ColorHelper.cs" />
     <Compile Include="Helpers\ConfigCipher.cs" />

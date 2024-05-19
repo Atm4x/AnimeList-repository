@@ -136,6 +136,26 @@ namespace LanguageClassTest.Models
             public string WaterfallTheme { get; set; } = "Тема водопада";
             public string LoveTheme { get; set; } = "Любовная тема";
             public string JungleTheme { get; set; } = "Тема джунглей";
+            public string DesertTheme { get; set; } = "Тема пустыни";
+            public string SunsetTheme { get; set; } = "Тема восхода";
+            public string OceanTheme { get; set; } = "Тема океана";
+            public string AutumnTheme { get; set; } = "Тема осени";
+            public string SpaceTheme { get; set; } = "Тема космоса";
+            public string ForestTheme { get; set; } = "Тема леса";
+            public string IceTheme { get; set; } = "Тема льда";
+            public string CandyTheme { get; set; } = "Конфетная тема";
+            public string RetroTheme { get; set; } = "Ретро тема";
+            public string NeonTheme { get; set; } = "Неоновая тема";
+            public string GalaxyTheme { get; set; } = "Галактическая тема";
+            public string RainbowTheme { get; set; } = "Радужная тема";
+            public string FireTheme { get; set; } = "Тема огня";
+            public string NatureTheme { get; set; } = "Тема природы";
+            public string NightTheme { get; set; } = "Ночная тема";
+            public string SnowTheme { get; set; } = "Снежная тема";
+            public string CyberpunkTheme { get; set; } = "Киберпанк тема";
+            public string SteampunkTheme { get; set; } = "Стимпанк тема";
+            public string MysticalForestTheme { get; set; } = "Тема таинственного леса";
+            public string SamuraiTheme { get; set; } = "Самурайская тема";
         }
 
         public class AddWindowDialogMessages
